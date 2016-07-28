@@ -3,8 +3,8 @@ Created on 20.06.2016
 
 :author: Fabian
 '''
-import pymel.core
-import maya.cmds
+from pymel import core
+from maya import cmds
 
 
 def getModelPanel():
@@ -13,13 +13,13 @@ def getModelPanel():
     :return: the panel or an empty string if no panel is visible
     :rtype: str
     """
-    mod_pan = maya.cmds.getPanel(type='modelPanel')
+    mod_pan = cmds.getPanel(type='modelPanel')
     if mod_pan is None:
         mod_pan = []
-    foc_pan = maya.cmds.getPanel(withFocus=True)
+    foc_pan = cmds.getPanel(withFocus=True)
     if foc_pan is None:
         foc_pan = []
-    vis_pan = maya.cmds.getPanel(visiblePanels=True)
+    vis_pan = cmds.getPanel(visiblePanels=True)
     if vis_pan is None:
         vis_pan = []
 
@@ -49,11 +49,11 @@ def createViewportSnapshot(imageFile):
     creates a snapshot from the current Viewport and saves it to the specified path
     :param str imageFile: the full path for the image file.
     '''
-    maya.cmds.playblast(frame=pymel.core.currentTime(q=True),
-                        format="image",
-                        compression=imageFile.split(".")[-1].lower(),
-                        completeFilename=imageFile,
-                        percent=100)
+    cmds.playblast(frame=core.currentTime(q=True),
+                   format="image",
+                   compression=imageFile.split(".")[-1].lower(),
+                   completeFilename=imageFile,
+                   percent=100)
 
 
 def saveRenderViewImage(imageFile):
@@ -61,8 +61,7 @@ def saveRenderViewImage(imageFile):
     editor = 'renderView'
 
     # if no image is in the render view this returns -1
-    if maya.cmds.renderWindowEditor(editor, q=True, nbImages=True) > -1:
+    if cmds.renderWindowEditor(editor, q=True, nbImages=True) > -1:
         print "yeah"
 
-    maya.cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
-
+    cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
