@@ -65,3 +65,42 @@ def saveRenderViewImage(imageFile):
         print "yeah"
 
     cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
+
+
+def toggleSmoothShaded(mdlEditor):
+    if  wireframeIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=True)
+        setSmoothShaded(mdlEditor)
+    elif wireframeOnShadedIsActive(mdlEditor):
+        setWireframe(mdlEditor)
+
+
+def toggleWireframe(mdlEditor):
+    if smoothShadedIsActive(mdlEditor) and wireframeOnShadedIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=False)
+    elif smoothShadedIsActive(mdlEditor) and not wireframeOnShadedIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=True)
+
+
+def setWireframe(mdlEditor):
+    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='wireframe')
+
+
+def setSmoothShaded(mdlEditor):
+    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='smoothShaded')
+
+
+def setWireframeOnShaded(mdlEditor, value=True):
+    cmds.modelEditor(mdlEditor, edit=True, wireframeOnShaded=value)
+
+
+def wireframeIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'wireframe'
+
+
+def smoothShadedIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'smoothShaded'
+
+
+def wireframeOnShadedIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, wireframeOnShaded=True)
