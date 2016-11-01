@@ -140,6 +140,19 @@ def initializeRuntimeCommands():
                                   "fctl.pastePivot()"),
                          category=category)
 
+    category = "FC-Tools.Display"
+    createRunTimeCommand(commandName="fcToggleSmoothShaded",
+                         annotation="Toggles smooth shading in the current viewport.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.toggleSmoothShaded()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcToggleWireframe",
+                         annotation="Toggles wireframe in the current viewport.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.toggleWireframe()"),
+                         category=category)
+
 
 def smartOpen():
     fileBefore = cmds.file(q=True, sn=True)
@@ -364,3 +377,13 @@ def pivot_to_selection():
     sel = cmds.ls(selection=True, fl=True)
     piv.pivotToComponents(sel)
     cmds.selectMode(object=True)
+
+def toggleSmoothShaded():
+    mdlEditor = pb.getModelPanel()
+    if mdlEditor:
+        pb.toggleSmoothShaded(mdlEditor)
+
+def toggleWireframe():
+    mdlEditor = pb.getModelPanel()
+    if mdlEditor:
+        pb.toggleWireframe(mdlEditor)

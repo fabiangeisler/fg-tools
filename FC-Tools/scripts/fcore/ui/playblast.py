@@ -3,8 +3,8 @@ Created on 20.06.2016
 
 :author: Fabian
 '''
-import pymel.core as pm
-import maya.cmds as cmds
+from pymel import core
+from maya import cmds
 
 
 def getModelPanel():
@@ -49,7 +49,7 @@ def createViewportSnapshot(imageFile):
     creates a snapshot from the current Viewport and saves it to the specified path
     :param str imageFile: the full path for the image file.
     '''
-    cmds.playblast(frame=pm.currentTime(q=True),
+    cmds.playblast(frame=core.currentTime(q=True),
                    format="image",
                    compression=imageFile.split(".")[-1].lower(),
                    completeFilename=imageFile,
@@ -66,3 +66,41 @@ def saveRenderViewImage(imageFile):
 
     cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
 
+
+def toggleSmoothShaded(mdlEditor):
+    if  wireframeIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=True)
+        setSmoothShaded(mdlEditor)
+    elif wireframeOnShadedIsActive(mdlEditor):
+        setWireframe(mdlEditor)
+
+
+def toggleWireframe(mdlEditor):
+    if smoothShadedIsActive(mdlEditor) and wireframeOnShadedIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=False)
+    elif smoothShadedIsActive(mdlEditor) and not wireframeOnShadedIsActive(mdlEditor):
+        setWireframeOnShaded(mdlEditor, value=True)
+
+
+def setWireframe(mdlEditor):
+    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='wireframe')
+
+
+def setSmoothShaded(mdlEditor):
+    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='smoothShaded')
+
+
+def setWireframeOnShaded(mdlEditor, value=True):
+    cmds.modelEditor(mdlEditor, edit=True, wireframeOnShaded=value)
+
+
+def wireframeIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'wireframe'
+
+
+def smoothShadedIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'smoothShaded'
+
+
+def wireframeOnShadedIsActive(mdlEditor):
+    return cmds.modelEditor(mdlEditor, q=True, wireframeOnShaded=True)
