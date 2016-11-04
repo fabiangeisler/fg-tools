@@ -103,6 +103,12 @@ def initializeRuntimeCommands():
                                   "fctl.selectUVSeams()"),
                          category=category)
 
+    createRunTimeCommand(commandName="fcSelectHardEdges",
+                         annotation="select all hard edges in your current selection",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.selectHardEdges()"),
+                         category=category)
+
     category = "FC-Tools.Modeling"
     createRunTimeCommand(commandName="fcSpherify",
                          annotation="Move all selected components to equal distance to each other.",
@@ -268,6 +274,28 @@ def selectUVSeams():
         cmds.select(seamEdges)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=0, polymeshEdge=1)
+
+
+def selectHardEdges():
+    """
+    select the hard edges on all selected objects.
+    """
+    cmds.selectMode(object=True)
+
+    hardEdges = []
+    for obj in cmds.ls(selection=True):
+        hardEdges += com.getHardEdges(obj)
+    if hardEdges:
+        objs = list(set([edge.split('.')[0] for edge in hardEdges]))
+
+        cmds.select(hardEdges)
+        cmds.hilite(objs)
+        cmds.selectMode(component=True)
+        cmds.selectType(allComponents=False, polymeshEdge=True)
+        print "Selected {0:d} hard edges".format(len(hardEdges)),
+    else:
+        cmds.selectMode(object=True)
+        print "Selection does not hard edges.",
 
 
 def saveSnapshot(mode="project"):

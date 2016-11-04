@@ -81,6 +81,12 @@ class FcMenu():
                         sourceType="mel",
                         echoCommand=True,
                         annotation='Select UV-Seams in polygon objects you selected.')
+            pm.menuItem(label="Select Hard Edges",
+                        imageOverlayLabel="HardE",
+                        command="fcSelectHardEdges;",
+                        sourceType="mel",
+                        echoCommand=True,
+                        annotation='Select hard edges in polygon objects you selected.')
 
             pm.menuItem(dividerLabel='Modeling', divider=True)
             pm.menuItem(label="Spherify",
