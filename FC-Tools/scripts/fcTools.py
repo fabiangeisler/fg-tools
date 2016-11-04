@@ -1,7 +1,5 @@
 '''
-Created on 12.06.2016
-
-:author: Fabian
+This module is the entry point for the fcTools library.
 '''
 import os
 import sys
@@ -9,7 +7,9 @@ import maya.cmds as cmds
 
 
 def initialize():
-
+    '''
+    Initializes the fcTools ether from mayapy or regular maya.
+    '''
     os.environ["FC_SCRIPTS"] = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
     os.environ["FC_ICONS"] = os.path.dirname(os.environ["FC_SCRIPTS"]) + "/icons/"
 
@@ -27,9 +27,11 @@ def initialize():
 
 def reloadPyModules(scriptPath):
     '''
-    :param str scriptPath: The full path to the script directory.
     This reloads all currently loaded python modules that are located inside the given scriptPath.
+
     This is mainly meant to be a developer tool so no "reload()" functions have to be placed in the actual code.
+
+    :param str scriptPath: The full path to the script directory.
     '''
     scriptPath = scriptPath.replace("\\", "/")
 

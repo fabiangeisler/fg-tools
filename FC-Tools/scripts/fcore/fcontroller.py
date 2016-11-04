@@ -271,9 +271,16 @@ def selectUVSeams():
     for obj in cmds.ls(selection=True):
         seamEdges += com.getSeamEdges(obj)
     if seamEdges:
+        objs = list(set([edge.split('.')[0] for edge in seamEdges]))
+
         cmds.select(seamEdges)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshEdge=1)
+        cmds.selectType(allComponents=False, polymeshEdge=True)
+        print "Selected {0:d} seam edges".format(len(seamEdges)),
+    else:
+        cmds.selectMode(object=True)
+        print "Selection does not seam edges.",
 
 
 def selectHardEdges():
