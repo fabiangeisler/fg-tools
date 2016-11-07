@@ -1,12 +1,11 @@
-"""
+'''
+'''
 
-"""
-
-import pymel.core as pm
-import maya.cmds as cmds
 import datetime
 import os
 
+import pymel.core as pm
+import maya.cmds as cmds
 
 
 def make_playblast(mode="desktop"):
@@ -108,5 +107,3 @@ def toggle_xray():
     for obj in sel:
         xray_status = cmds.displaySurface(obj, q=True, xRay=True)
         cmds.displaySurface(obj, xRay=not(xray_status[0]))
-
-

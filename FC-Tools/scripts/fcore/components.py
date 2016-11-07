@@ -137,6 +137,17 @@ def getSeamEdges(obj):
     return [edge for edge in edges if isOnUvSeam(edge)]
 
 
+def getHardEdges(obj):
+    '''
+    :param str obj:
+    :returns: all hard edges from the given mesh in a flat list
+    :rtype: list of str
+    '''
+    return [obj + ".e[" + str(i) + "]"
+            for i, edgeInfo in enumerate(cmds.polyInfo(obj + ".e[*]", ev=True))
+            if edgeInfo.endswith("Hard\n")]
+
+
 def getMidpoint(vertex_list):
     '''
     This function calculates the midpoint of a given vertex list.

@@ -103,6 +103,12 @@ def initializeRuntimeCommands():
                                   "fctl.selectUVSeams()"),
                          category=category)
 
+    createRunTimeCommand(commandName="fcSelectHardEdges",
+                         annotation="select all hard edges in your current selection",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.selectHardEdges()"),
+                         category=category)
+
     category = "FC-Tools.Modeling"
     createRunTimeCommand(commandName="fcSpherify",
                          annotation="Move all selected components to equal distance to each other.",
@@ -265,9 +271,38 @@ def selectUVSeams():
     for obj in cmds.ls(selection=True):
         seamEdges += com.getSeamEdges(obj)
     if seamEdges:
+        objs = list(set([edge.split('.')[0] for edge in seamEdges]))
+
         cmds.select(seamEdges)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshEdge=1)
+        cmds.selectType(allComponents=False, polymeshEdge=True)
+        print "Selected {0:d} seam edges".format(len(seamEdges)),
+    else:
+        cmds.selectMode(object=True)
+        print "Selection does not seam edges.",
+
+
+def selectHardEdges():
+    """
+    select the hard edges on all selected objects.
+    """
+    cmds.selectMode(object=True)
+
+    hardEdges = []
+    for obj in cmds.ls(selection=True):
+        hardEdges += com.getHardEdges(obj)
+    if hardEdges:
+        objs = list(set([edge.split('.')[0] for edge in hardEdges]))
+
+        cmds.select(hardEdges)
+        cmds.hilite(objs)
+        cmds.selectMode(component=True)
+        cmds.selectType(allComponents=False, polymeshEdge=True)
+        print "Selected {0:d} hard edges".format(len(hardEdges)),
+    else:
+        cmds.selectMode(object=True)
+        print "Selection does not hard edges.",
 
 
 def saveSnapshot(mode="project"):
@@ -335,7 +370,7 @@ def spherifyUI():
 
     newPositions = mx.spherify(positions, radius)
 
-    for pos, vert in zip(positions, newPositions):
+    for vert, pos in zip(vertices, newPositions):
         cmds.move(pos[0], pos[1], pos[2], vert, a=True)
 
 
