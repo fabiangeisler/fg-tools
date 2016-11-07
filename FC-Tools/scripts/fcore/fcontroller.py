@@ -370,7 +370,7 @@ def spherifyUI():
 
     newPositions = mx.spherify(positions, radius)
 
-    for pos, vert in zip(positions, newPositions):
+    for vert, pos in zip(vertices, newPositions):
         cmds.move(pos[0], pos[1], pos[2], vert, a=True)
 
 
