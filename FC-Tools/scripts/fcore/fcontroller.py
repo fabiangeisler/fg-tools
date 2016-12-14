@@ -216,9 +216,11 @@ def openTextureFolder():
 def selectTriangles():
     tris = com.getTriangles()
     if tris:
+        objs = list(set([tri.split('.')[0] for tri in tris]))
         cmds.select(tris)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} Trangles".format(len(tris)),
     else:
         cmds.selectMode(object=True)
@@ -228,9 +230,11 @@ def selectTriangles():
 def selectNGons():
     ngons = com.getNGons()
     if ngons:
+        objs = list(set([ngon.split('.')[0] for ngon in ngons]))
         cmds.select(ngons)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} N-Gons".format(len(ngons)),
     else:
         cmds.selectMode(object=True)
@@ -240,9 +244,11 @@ def selectNGons():
 def selectLaminaFaces():
     lamina = com.getLaminaFaces()
     if lamina:
+        objs = list(set([l.split('.')[0] for l in lamina]))
         cmds.select(lamina)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} lamina faces".format(len(lamina)),
     else:
         cmds.selectMode(object=True)
@@ -252,7 +258,9 @@ def selectLaminaFaces():
 def selectNonManifoldVertices():
     nmv = com.getNonManifoldVertices()
     if nmv:
+        objs = list(set([vert.split('.')[0] for vert in nmv]))
         cmds.select(nmv)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, vertex=True)
         print "Selected {0:d} non-manifold vertices".format(len(nmv)),
