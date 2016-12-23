@@ -7,6 +7,11 @@ import os
 import sys
 
 import maya.cmds as cmds
+import atexit
+
+def uninitializeMayaPy():
+    print 'uninitialize Mayapy'
+    maya.standalone.uninitialize()
 
 MAYASTANDALONE_INITALIZED = False
 
@@ -29,6 +34,8 @@ if not hasattr(cmds, "about") and not MAYASTANDALONE_INITALIZED:
     # like sourcing the usersetup.mel and other stuff.
     import pymel.core  # @UnusedImport
     MAYASTANDALONE_INITALIZED = True
+
+    atexit.register(uninitializeMayaPy)
 
 else:
     print "Scipping initizalisation"
