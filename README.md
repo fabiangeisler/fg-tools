@@ -4,7 +4,9 @@ This is a collection of some handy (modeling-) tools in maya. If you run the cod
 you will get a small extra menu with all available commands. All of these commands
 are also available as runtimeCommands so you can assign hot-keys to it.
 
-You can use the Tools in maya when you execute this code snippet:
+If you want to use these tools you must first clone this repository to your local
+harddrive. After that you have to open Maya and ether execute this script in the
+scripteditor.
 
 ```python
 import sys
@@ -16,7 +18,8 @@ if fcToolPath not in sys.path:
 import fcTools
 fcTools.initialize()
 ```
-You can put this in a shelf button or in the userSetup.py.
+I recommend to but this in a shelf button or in the userSetup.py.
+Also note that this is save to execute in batchmode.
 
 Supported Platforms: **Windows**
 
