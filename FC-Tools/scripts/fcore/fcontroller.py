@@ -134,6 +134,19 @@ def initializeRuntimeCommands():
                                   "fctl.moveComponentsToZAxis()"),
                          category=category)
 
+    createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
+                         annotation='Assign the Default Shader "lambert1" to all selected objects.',
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.assignDefaultShaderToSelection()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcToggleXRay",
+                         annotation="Toggle X-Ray display in the viewport on all selected objects.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.toggleXray()"),
+                         category=category)
+
+    category = "FC-Tools.Pivots"
     createRunTimeCommand(commandName="fcCopyPivot",
                          annotation="Copies the pivot of the selected object.",
                          command=("import fcore.fcontroller as fctl\n"
@@ -144,6 +157,18 @@ def initializeRuntimeCommands():
                          annotation="Pastes the pivot to all selected objects.",
                          command=("import fcore.fcontroller as fctl\n"
                                   "fctl.pastePivot()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotsToWorldCenter",
+                         annotation="Copies the pivot of the selected object.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotsToWorldCenter()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotToSelection",
+                         annotation="Pastes the pivot to all selected objects.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotToSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
@@ -413,13 +438,22 @@ def pastePivot():
     print "Applied Pivot to:    " + str(sel),
 
 
-def pivot_to_selection():
+def pivotToSelection():
     """
     puts the Pivot to the current component selection
     """
     sel = cmds.ls(selection=True, fl=True)
     piv.pivotToComponents(sel)
     cmds.selectMode(object=True)
+
+
+def pivotsToWorldCenter():
+    """
+    Moves all pivots from the selected objects to the world center
+    """
+    sel = cmds.ls(selection=True)
+    for obj in sel:
+        piv.pivotToWorldCenter(obj)
 
 def toggleSmoothShaded():
     mdlEditor = pb.getModelPanel()
@@ -430,3 +464,6 @@ def toggleWireframe():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleWireframe(mdlEditor)
+
+def assignDefaultShaderToSelection():
+    cmds.sets(e=True, forceElement="initialShadingGroup")
