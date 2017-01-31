@@ -13,7 +13,6 @@ import mathExtended as mx
 import ui.playblast as pb
 import modeling as mdl
 import pivot as piv
-import os
 
 
 def createRunTimeCommand(commandName, annotation, command, category):
@@ -134,6 +133,19 @@ def initializeRuntimeCommands():
                                   "fctl.moveComponentsToZAxis()"),
                          category=category)
 
+    createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
+                         annotation='Assign the Default Shader "lambert1" to all selected objects.',
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.assignDefaultShaderToSelection()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcToggleXrayDisplayOfSelection",
+                         annotation="Toggle X-Ray display in the viewport on all selected objects.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.toggleXrayDisplayOfSelection()"),
+                         category=category)
+
+    category = "FC-Tools.Pivots"
     createRunTimeCommand(commandName="fcCopyPivot",
                          annotation="Copies the pivot of the selected object.",
                          command=("import fcore.fcontroller as fctl\n"
@@ -144,6 +156,18 @@ def initializeRuntimeCommands():
                          annotation="Pastes the pivot to all selected objects.",
                          command=("import fcore.fcontroller as fctl\n"
                                   "fctl.pastePivot()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotsToWorldCenter",
+                         annotation="Moves the pivots of all selected objects to the world-center.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotsToWorldCenter()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotToSelection",
+                         annotation="Moves the pivot to the middle of the selected components.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotToSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
@@ -421,12 +445,36 @@ def pivotToComponentSelection():
     piv.pivotToComponents(sel)
     cmds.selectMode(object=True)
 
+
+def pivotsToWorldCenter():
+    """
+    Moves all pivots from the selected objects to the world center
+    """
+    sel = cmds.ls(selection=True)
+    for obj in sel:
+        piv.pivotToWorldCenter(obj)
+
+
 def toggleSmoothShaded():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleSmoothShaded(mdlEditor)
 
+
 def toggleWireframe():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleWireframe(mdlEditor)
+
+
+def assignDefaultShaderToSelection():
+    cmds.sets(e=True, forceElement="initialShadingGroup")
+
+
+def toggleXrayDisplayOfSelection():
+    '''
+    Toggles the XRay display in the viewport of the selected objects.
+    '''
+    # this flag combination gives you all surface shapes below the selected surface shape
+    sel = cmds.ls(selection=True, allPaths=True, dagObjects=True, type='surfaceShape')
+    mdl.toggleXRayDisplay(objects=sel)

@@ -40,13 +40,12 @@ def freezeTransforms():
         print fail
 
 
-def toggleXray():
+def toggleXRayDisplay(objects):
     '''
-    Toggles the XRay display in the viewport of the selected objects.
+    Toggles the XRay display in the viewport of the given objects.
+    :param list objects:
     '''
-    # this flag combination gives you all surface shapes below the selected surface shape
-    sel = cmds.ls(selection=True, allPaths=True, dagObjects=True, type='surfaceShape')
-
-    xrayStatus = not cmds.displaySurface(sel[0], query=True, xRay=True)[0]
-    for obj in sel:
-        cmds.displaySurface(obj, xRay=xrayStatus)
+    if objects:
+        xrayStatus = not cmds.displaySurface(objects[0], query=True, xRay=True)[0]
+        for obj in objects:
+            cmds.displaySurface(obj, xRay=xrayStatus)
