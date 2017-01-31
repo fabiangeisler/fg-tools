@@ -5,14 +5,16 @@ Created on 20.06.2016
 '''
 from pymel import core
 from maya import cmds
+import os
+import datetime
 
 
 def getModelPanel():
-    """
+    '''
     This function will get (or otherwise guess) the currently active model-panel!
     :return: the panel or an empty string if no panel is visible
     :rtype: str
-    """
+    '''
     mod_pan = cmds.getPanel(type='modelPanel')
     if mod_pan is None:
         mod_pan = []
@@ -44,12 +46,80 @@ def getModelPanel():
             return vis_mod_pan[0]
 
 
+def makePlayblast(mode="desktop"):
+    '''
+    make a playblast from the current model panel
+
+    :param mode: "dialog": Save with Dialog
+                 "project": Save to Project Directory
+                 "desktop": Save to Desktop
+    '''
+
+    p = getModelPanel()
+    cam = cmds.modelEditor(p, query=True, camera=True)
+    currFileName = cmds.file(query=True, sn=True, shn=True)
+    niceFileName = ("{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}"
+                    "").format(datetime.datetime.now(),
+                               currFileName.strip(".ma"),
+                               cam)
+
+    saveDir = os.path.expanduser("~").replace("Documents", "Desktop/") + niceFileName + ".mov"
+    if mode == "project":
+        projectDir = cmds.workspace(query=True, rd=True)
+        saveDir = projectDir + "/images/" + niceFileName + ".mov"
+    elif mode == "dialog":
+        saveDir = cmds.fileDialog2(cap="Save Playblast",
+                                   fileFilter=("MOV (*.mov);;"
+                                               "JPEG-Sequence (*.jpg)"),
+                                   startingDirectory=saveDir,
+                                   fileMode=0,
+                                   okCaption="Save",
+                                   dialogStyle=2)[0]
+
+    win = core.window(title="Playblast Panel", widthHeight=(1282, 722))
+    core.paneLayout()
+    me = core.modelEditor(displayAppearance="smoothShaded",
+                          displayTextures=True,
+                          twoSidedLighting=False,
+                          allObjects=False,
+                          nurbsSurfaces=True,
+                          polymeshes=True,
+                          grid=False,
+                          headsUpDisplay=False,
+                          selectionHiliteDisplay=False,
+                          camera=cam)
+    core.showWindow(win)
+    core.modelEditor(me, edit=True, activeView=True)
+
+    if saveDir is not None:
+        if saveDir.endswith("mov"):
+            core.playblast(percent=100,
+                           quality=90,
+                           startTime=core.playbackOptions(query=True, minTime=True),
+                           endTime=core.playbackOptions(query=True, maxTime=True),
+                           format="qt",
+                           compression="H.264",
+                           forceOverwrite=True,
+                           filename=saveDir)
+        else:
+            core.playblast(percent=100,
+                           quality=90,
+                           startTime=core.playbackOptions(query=True, minTime=True),
+                           endTime=core.playbackOptions(query=True, maxTime=True),
+                           format="image",
+                           compression="jpg",
+                           forceOverwrite=True,
+                           filename=saveDir)
+
+    core.deleteUI(win, window=True)
+
+
 def createViewportSnapshot(imageFile):
     '''
     creates a snapshot from the current Viewport and saves it to the specified path
     :param str imageFile: the full path for the image file.
     '''
-    cmds.playblast(frame=core.currentTime(q=True),
+    cmds.playblast(frame=core.currentTime(query=True),
                    format="image",
                    compression=imageFile.split(".")[-1].lower(),
                    completeFilename=imageFile,
@@ -61,14 +131,14 @@ def saveRenderViewImage(imageFile):
     editor = 'renderView'
 
     # if no image is in the render view this returns -1
-    if cmds.renderWindowEditor(editor, q=True, nbImages=True) > -1:
+    if cmds.renderWindowEditor(editor, query=True, nbImages=True) > -1:
         print "yeah"
 
     cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
 
 
 def toggleSmoothShaded(mdlEditor):
-    if  wireframeIsActive(mdlEditor):
+    if wireframeIsActive(mdlEditor):
         setWireframeOnShaded(mdlEditor, value=True)
         setSmoothShaded(mdlEditor)
     elif wireframeOnShadedIsActive(mdlEditor):
@@ -95,12 +165,12 @@ def setWireframeOnShaded(mdlEditor, value=True):
 
 
 def wireframeIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'wireframe'
+    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'wireframe'
 
 
 def smoothShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, q=True, displayAppearance=True) == 'smoothShaded'
+    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'smoothShaded'
 
 
 def wireframeOnShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, q=True, wireframeOnShaded=True)
+    return cmds.modelEditor(mdlEditor, query=True, wireframeOnShaded=True)

@@ -28,7 +28,6 @@ def initialize():
 def reloadPyModules(scriptPath):
     '''
     This reloads all currently loaded python modules that are located inside the given scriptPath.
-
     This is mainly meant to be a developer tool so no "reload()" functions have to be placed in the actual code.
 
     :param str scriptPath: The full path to the script directory.
@@ -51,10 +50,10 @@ def reloadPyModules(scriptPath):
 
     percent = 100.0 / max(len(reloadModules), 1)
 
-    for i, modName in enumerate(reloadOrder):
+    for i, modName in enumerate(reloadOrder, 1):
         try:
             reload(reloadModules[modName])
         except Exception as error:
             print "ERROR:" + str(error)
-        print "{0:3.0f}% loaded: reloading {1:s}".format(percent * (i + 1), modName)
+        print "{0:3.0f}% loaded: reloading {1:s}".format(percent * i, modName)
     print "Reloaded {0:d} Modules.".format(len(reloadModules)),

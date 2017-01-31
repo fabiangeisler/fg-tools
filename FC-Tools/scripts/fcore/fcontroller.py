@@ -13,7 +13,6 @@ import mathExtended as mx
 import ui.playblast as pb
 import modeling as mdl
 import pivot as piv
-import os
 
 
 def createRunTimeCommand(commandName, annotation, command, category):
@@ -134,6 +133,19 @@ def initializeRuntimeCommands():
                                   "fctl.moveComponentsToZAxis()"),
                          category=category)
 
+    createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
+                         annotation='Assign the Default Shader "lambert1" to all selected objects.',
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.assignDefaultShaderToSelection()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcToggleXrayDisplayOfSelection",
+                         annotation="Toggle X-Ray display in the viewport on all selected objects.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.toggleXrayDisplayOfSelection()"),
+                         category=category)
+
+    category = "FC-Tools.Pivots"
     createRunTimeCommand(commandName="fcCopyPivot",
                          annotation="Copies the pivot of the selected object.",
                          command=("import fcore.fcontroller as fctl\n"
@@ -144,6 +156,18 @@ def initializeRuntimeCommands():
                          annotation="Pastes the pivot to all selected objects.",
                          command=("import fcore.fcontroller as fctl\n"
                                   "fctl.pastePivot()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotsToWorldCenter",
+                         annotation="Moves the pivots of all selected objects to the world-center.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotsToWorldCenter()"),
+                         category=category)
+
+    createRunTimeCommand(commandName="fcPivotToSelection",
+                         annotation="Moves the pivot to the middle of the selected components.",
+                         command=("import fcore.fcontroller as fctl\n"
+                                  "fctl.pivotToSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
@@ -216,9 +240,11 @@ def openTextureFolder():
 def selectTriangles():
     tris = com.getTriangles()
     if tris:
+        objs = list(set([tri.split('.')[0] for tri in tris]))
         cmds.select(tris)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} Trangles".format(len(tris)),
     else:
         cmds.selectMode(object=True)
@@ -228,9 +254,11 @@ def selectTriangles():
 def selectNGons():
     ngons = com.getNGons()
     if ngons:
+        objs = list(set([ngon.split('.')[0] for ngon in ngons]))
         cmds.select(ngons)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} N-Gons".format(len(ngons)),
     else:
         cmds.selectMode(object=True)
@@ -240,9 +268,11 @@ def selectNGons():
 def selectLaminaFaces():
     lamina = com.getLaminaFaces()
     if lamina:
+        objs = list(set([l.split('.')[0] for l in lamina]))
         cmds.select(lamina)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
-        cmds.selectType(allComponents=0, polymeshFace=1)
+        cmds.selectType(allComponents=False, polymeshFace=True)
         print "Selected {0:d} lamina faces".format(len(lamina)),
     else:
         cmds.selectMode(object=True)
@@ -252,7 +282,9 @@ def selectLaminaFaces():
 def selectNonManifoldVertices():
     nmv = com.getNonManifoldVertices()
     if nmv:
+        objs = list(set([vert.split('.')[0] for vert in nmv]))
         cmds.select(nmv)
+        cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, vertex=True)
         print "Selected {0:d} non-manifold vertices".format(len(nmv)),
@@ -405,7 +437,7 @@ def pastePivot():
     print "Applied Pivot to:    " + str(sel),
 
 
-def pivot_to_selection():
+def pivotToComponentSelection():
     """
     puts the Pivot to the current component selection
     """
@@ -413,12 +445,36 @@ def pivot_to_selection():
     piv.pivotToComponents(sel)
     cmds.selectMode(object=True)
 
+
+def pivotsToWorldCenter():
+    """
+    Moves all pivots from the selected objects to the world center
+    """
+    sel = cmds.ls(selection=True)
+    for obj in sel:
+        piv.pivotToWorldCenter(obj)
+
+
 def toggleSmoothShaded():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleSmoothShaded(mdlEditor)
 
+
 def toggleWireframe():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleWireframe(mdlEditor)
+
+
+def assignDefaultShaderToSelection():
+    cmds.sets(e=True, forceElement="initialShadingGroup")
+
+
+def toggleXrayDisplayOfSelection():
+    '''
+    Toggles the XRay display in the viewport of the selected objects.
+    '''
+    # this flag combination gives you all surface shapes below the selected surface shape
+    sel = cmds.ls(selection=True, allPaths=True, dagObjects=True, type='surfaceShape')
+    mdl.toggleXRayDisplay(objects=sel)
