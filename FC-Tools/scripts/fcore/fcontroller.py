@@ -438,7 +438,7 @@ def pastePivot():
     print "Applied Pivot to:    " + str(sel),
 
 
-def pivotToSelection():
+def pivotToComponentSelection():
     """
     puts the Pivot to the current component selection
     """
