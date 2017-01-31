@@ -118,7 +118,7 @@ class FcMenu():
                         echoCommand=True,
                         annotation='Assign the Default Shader "lambert1" to all selected objects.')
             pm.menuItem(label='Toggle X-Ray',
-                        command='fcToggleXRay;',
+                        command='fcToggleXrayDisplayOfSelection;',
                         imageOverlayLabel='XRay',
                         sourceType='mel',
                         echoCommand=True,
@@ -137,7 +137,7 @@ class FcMenu():
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Pastes the pivot to all selected objects.')
-            pm.menuItem(label='Pivot to WorldCenter',
+            pm.menuItem(label='Pivots to WorldCenter',
                         command='fcPivotsToWorldCenter;',
                         imageOverlayLabel='worldP',
                         sourceType='mel',

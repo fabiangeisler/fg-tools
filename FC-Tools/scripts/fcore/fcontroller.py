@@ -13,7 +13,6 @@ import mathExtended as mx
 import ui.playblast as pb
 import modeling as mdl
 import pivot as piv
-import os
 
 
 def createRunTimeCommand(commandName, annotation, command, category):
@@ -140,10 +139,10 @@ def initializeRuntimeCommands():
                                   "fctl.assignDefaultShaderToSelection()"),
                          category=category)
 
-    createRunTimeCommand(commandName="fcToggleXRay",
+    createRunTimeCommand(commandName="fcToggleXrayDisplayOfSelection",
                          annotation="Toggle X-Ray display in the viewport on all selected objects.",
                          command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.toggleXray()"),
+                                  "fctl.toggleXrayDisplayOfSelection()"),
                          category=category)
 
     category = "FC-Tools.Pivots"
@@ -160,13 +159,13 @@ def initializeRuntimeCommands():
                          category=category)
 
     createRunTimeCommand(commandName="fcPivotsToWorldCenter",
-                         annotation="Copies the pivot of the selected object.",
+                         annotation="Moves the pivots of all selected objects to the world-center.",
                          command=("import fcore.fcontroller as fctl\n"
                                   "fctl.pivotsToWorldCenter()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcPivotToSelection",
-                         annotation="Pastes the pivot to all selected objects.",
+                         annotation="Moves the pivot to the middle of the selected components.",
                          command=("import fcore.fcontroller as fctl\n"
                                   "fctl.pivotToSelection()"),
                          category=category)
@@ -455,15 +454,27 @@ def pivotsToWorldCenter():
     for obj in sel:
         piv.pivotToWorldCenter(obj)
 
+
 def toggleSmoothShaded():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleSmoothShaded(mdlEditor)
+
 
 def toggleWireframe():
     mdlEditor = pb.getModelPanel()
     if mdlEditor:
         pb.toggleWireframe(mdlEditor)
 
+
 def assignDefaultShaderToSelection():
     cmds.sets(e=True, forceElement="initialShadingGroup")
+
+
+def toggleXrayDisplayOfSelection():
+    '''
+    Toggles the XRay display in the viewport of the selected objects.
+    '''
+    # this flag combination gives you all surface shapes below the selected surface shape
+    sel = cmds.ls(selection=True, allPaths=True, dagObjects=True, type='surfaceShape')
+    mdl.toggleXRayDisplay(objects=sel)
