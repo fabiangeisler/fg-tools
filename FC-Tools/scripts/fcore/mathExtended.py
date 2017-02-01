@@ -1,17 +1,13 @@
 '''
-Created on 12.06.2016
-
 some extend math functionality
-
-:author: Fabian
 '''
 import math
 
 
 def spherify(positions, radius):
-    """
+    '''
     puts selected Components to average Distance to their Midpoint
-    """
+    '''
     resultPositions = []
 
     midpoint = averageVector(positions)

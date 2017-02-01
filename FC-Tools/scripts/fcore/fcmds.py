@@ -1,7 +1,5 @@
 '''
-Created on 12.06.2016
-
-:author: Fabian
+This module contains all core functions that can be safely run during batchmode.
 '''
 import maya.mel as mel
 

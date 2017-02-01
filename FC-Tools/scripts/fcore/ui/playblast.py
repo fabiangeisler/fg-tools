@@ -1,7 +1,6 @@
 '''
-Created on 20.06.2016
-
-:author: Fabian
+This module contains functions for making playblasts and screenshots from
+modelpanels in Maya. Because of this GUI dependency this should not be loaded in batch mode.
 '''
 from pymel import core
 from maya import cmds
@@ -29,7 +28,7 @@ def getModelPanel():
 
     if len(vis_mod_pan) == 0:
         # no modelPanel visible
-        return ""
+        return ''
 
     elif len(vis_mod_pan) == 1:
         # 1 modelPanel visible! -> we found a winner!
@@ -46,39 +45,39 @@ def getModelPanel():
             return vis_mod_pan[0]
 
 
-def makePlayblast(mode="desktop"):
+def makePlayblast(mode='desktop'):
     '''
     make a playblast from the current model panel
 
-    :param mode: "dialog": Save with Dialog
-                 "project": Save to Project Directory
-                 "desktop": Save to Desktop
+    :param mode: 'dialog': Save with Dialog
+                 'project': Save to Project Directory
+                 'desktop': Save to Desktop
     '''
 
     p = getModelPanel()
     cam = cmds.modelEditor(p, query=True, camera=True)
     currFileName = cmds.file(query=True, sn=True, shn=True)
-    niceFileName = ("{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}"
-                    "").format(datetime.datetime.now(),
-                               currFileName.strip(".ma"),
+    niceFileName = ('{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'
+                    '').format(datetime.datetime.now(),
+                               currFileName.strip('.ma'),
                                cam)
 
-    saveDir = os.path.expanduser("~").replace("Documents", "Desktop/") + niceFileName + ".mov"
-    if mode == "project":
+    saveDir = os.path.expanduser('~').replace('Documents', 'Desktop/') + niceFileName + '.mov'
+    if mode == 'project':
         projectDir = cmds.workspace(query=True, rd=True)
-        saveDir = projectDir + "/images/" + niceFileName + ".mov"
-    elif mode == "dialog":
-        saveDir = cmds.fileDialog2(cap="Save Playblast",
-                                   fileFilter=("MOV (*.mov);;"
-                                               "JPEG-Sequence (*.jpg)"),
+        saveDir = projectDir + '/images/' + niceFileName + '.mov'
+    elif mode == 'dialog':
+        saveDir = cmds.fileDialog2(cap='Save Playblast',
+                                   fileFilter=('MOV (*.mov);;'
+                                               'JPEG-Sequence (*.jpg)'),
                                    startingDirectory=saveDir,
                                    fileMode=0,
-                                   okCaption="Save",
+                                   okCaption='Save',
                                    dialogStyle=2)[0]
 
-    win = core.window(title="Playblast Panel", widthHeight=(1282, 722))
+    win = core.window(title='Playblast Panel', widthHeight=(1282, 722))
     core.paneLayout()
-    me = core.modelEditor(displayAppearance="smoothShaded",
+    me = core.modelEditor(displayAppearance='smoothShaded',
                           displayTextures=True,
                           twoSidedLighting=False,
                           allObjects=False,
@@ -92,13 +91,13 @@ def makePlayblast(mode="desktop"):
     core.modelEditor(me, edit=True, activeView=True)
 
     if saveDir is not None:
-        if saveDir.endswith("mov"):
+        if saveDir.endswith('mov'):
             core.playblast(percent=100,
                            quality=90,
                            startTime=core.playbackOptions(query=True, minTime=True),
                            endTime=core.playbackOptions(query=True, maxTime=True),
-                           format="qt",
-                           compression="H.264",
+                           format='qt',
+                           compression='H.264',
                            forceOverwrite=True,
                            filename=saveDir)
         else:
@@ -106,8 +105,8 @@ def makePlayblast(mode="desktop"):
                            quality=90,
                            startTime=core.playbackOptions(query=True, minTime=True),
                            endTime=core.playbackOptions(query=True, maxTime=True),
-                           format="image",
-                           compression="jpg",
+                           format='image',
+                           compression='jpg',
                            forceOverwrite=True,
                            filename=saveDir)
 
@@ -120,8 +119,8 @@ def createViewportSnapshot(imageFile):
     :param str imageFile: the full path for the image file.
     '''
     cmds.playblast(frame=core.currentTime(query=True),
-                   format="image",
-                   compression=imageFile.split(".")[-1].lower(),
+                   format='image',
+                   compression=imageFile.split('.')[-1].lower(),
                    completeFilename=imageFile,
                    percent=100)
 
@@ -132,7 +131,7 @@ def saveRenderViewImage(imageFile):
 
     # if no image is in the render view this returns -1
     if cmds.renderWindowEditor(editor, query=True, nbImages=True) > -1:
-        print "yeah"
+        print 'yeah'
 
     cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
 
