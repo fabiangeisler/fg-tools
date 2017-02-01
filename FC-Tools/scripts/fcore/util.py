@@ -1,7 +1,5 @@
 '''
-Created on 12.06.2016
-
-:author: Fabian
+little utility functions for this and that.
 '''
 import maya.cmds as cmds
 
