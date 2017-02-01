@@ -1,9 +1,6 @@
 '''
-Created on 16.06.2016
+This module collects all functions that have something to do with polygon object components.
 
-This module collects all functions that have something todo with polygon object components.
-
-:author: Fabian
 '''
 import maya.cmds as cmds
 import util
@@ -11,11 +8,11 @@ import mathExtended as mx
 
 
 def convertToVertices(componentList):
-    """
+    '''
     :param list componentList:
     :returns: converts any given component-list to vertices
     :rtype: list
-    """
+    '''
     vertices = cmds.polyListComponentConversion(componentList, tv=True)
     return cmds.ls(vertices, flatten=True)
 
@@ -117,11 +114,11 @@ def getNonManifoldVertices(objList=None):
 
 
 def isOnUvSeam(edge):
-    """
+    '''
     :param str edge: The edge to check
     :returns: whether the given edge has more than 2 UV-Points associated with it. (Which means it lies on a seam.)
     :rtype: bool
-    """
+    '''
     uvPoints = cmds.polyListComponentConversion(edge, fromEdge=True, toUV=True)
     flatUvPoints = cmds.ls(uvPoints, flatten=True)
     return len(flatUvPoints) > 2
@@ -133,7 +130,7 @@ def getSeamEdges(obj):
     :returns: all edges that lie on a uv-seam.
     :rtype: list
     '''
-    edges = cmds.ls(obj + ".e[*]", flatten=True)
+    edges = cmds.ls(obj + '.e[*]', flatten=True)
     return [edge for edge in edges if isOnUvSeam(edge)]
 
 
@@ -143,9 +140,9 @@ def getHardEdges(obj):
     :returns: all hard edges from the given mesh in a flat list
     :rtype: list of str
     '''
-    return [obj + ".e[" + str(i) + "]"
-            for i, edgeInfo in enumerate(cmds.polyInfo(obj + ".e[*]", ev=True))
-            if edgeInfo.endswith("Hard\n")]
+    return [obj + '.e[' + str(i) + ']'
+            for i, edgeInfo in enumerate(cmds.polyInfo(obj + '.e[*]', ev=True))
+            if edgeInfo.endswith('Hard\n')]
 
 
 def getMidpoint(vertex_list):
@@ -160,4 +157,3 @@ def getMidpoint(vertex_list):
 
     positions = [cmds.pointPosition(vertex) for vertex in vertex_list]
     return mx.averageVector(positions)
-
