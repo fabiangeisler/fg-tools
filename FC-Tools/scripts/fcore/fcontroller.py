@@ -1,7 +1,5 @@
 '''
-Created on 16.06.2016
-
-:author: Fabian
+This module is the main module that collects all core functionality that can be used in GUI mode.
 '''
 import datetime
 

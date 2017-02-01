@@ -1,7 +1,5 @@
 '''
-Created on 18.06.2016
-
-:author: Fabian
+Functions for file system manipulation.
 '''
 import os
 import subprocess
@@ -11,16 +9,17 @@ import re
 
 def findWorkspace(filePath):
     '''
-    takes the given filepath and walks up the structure and tries to find the workspace.mel.
+    takes the given file path and walks up the structure and tries to find the workspace.mel.
     and returns it when it finds it.
+
     :param str filePath:
     :rtype: str
     '''
     dirname = os.path.dirname(filePath)
-    while not os.path.exists(dirname + "/workspace.mel"):
+    while not os.path.exists(dirname + '/workspace.mel'):
         newDirname = os.path.dirname(dirname)
         if newDirname == dirname:
-            raise OSError("Could not find workspace.mel")
+            raise OSError('Could not find workspace.mel')
         else:
             dirname = newDirname
     return dirname
@@ -32,7 +31,7 @@ def openExplorer(path):
     :param str path:
     '''
     if os.path.isfile(path):
-        subprocess.Popen(r'Explorer /select,{0:s}'.format(path.replace("/", "\\")))
+        subprocess.Popen(r'Explorer /select,{0:s}'.format(path.replace('/', '\\')))
     else:
         os.startfile(path)
 
@@ -42,7 +41,7 @@ def getRenderFolder():
     :returns: the current folder where images will be rendered.
     :rtype: str
     '''
-    return cmds.workspace(expandName=cmds.workspace(fileRuleEntry="images")) + "/"
+    return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='images')) + '/'
 
 
 def getSourceimagesFolder():
@@ -50,17 +49,17 @@ def getSourceimagesFolder():
     :returns: the current textures folder.
     :rtype: str
     '''
-    return cmds.workspace(expandName=cmds.workspace(fileRuleEntry="sourceImages")) + "/"
+    return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='sourceImages')) + '/'
 
 
 def getDesktopFolder():
-    return os.path.expanduser("~").replace("Documents", "Desktop") + "/"
+    return os.path.expanduser('~').replace('Documents', 'Desktop') + '/'
 
 
 def incremental_save():
 
     curr_filename = cmds.file(q=True, sn=True)
-    match = re.finditer(r"\d+", curr_filename)
+    match = re.finditer(r'\d+', curr_filename)
 
     if match:
         pos_of_numbers = [m for m in match]
@@ -73,10 +72,11 @@ def incremental_save():
 
         cmds.file(rename=increment_filename)
 
-        if curr_filename[-2:] == "mb":
-            cmds.file(save=True, type='mayaBinary')
+        if curr_filename.endswith('mb'):
+            filetype = 'mayaBinary'
         else:
-            cmds.file(save=True, type='mayaAscii')
-        print "File saved: " + increment_filename,
+            filetype = 'mayaAscii'
+        cmds.file(save=True, type=filetype)
+        print 'File saved: ' + increment_filename,
     else:
-        cmds.warning("Filename has no Numbers in it!")
+        cmds.warning('Filename has no Numbers in it!')
