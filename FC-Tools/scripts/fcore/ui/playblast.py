@@ -3,9 +3,31 @@ This module contains functions for making playblasts and screenshots from
 modelpanels in Maya. Because of this GUI dependency this should not be loaded in batch mode.
 '''
 from pymel import core
-from maya import cmds
+import maya.cmds as cmds
 import os
 import datetime
+
+import maya.cmds
+
+
+class CaptureThumbnail(object):
+    '''
+    This class can capture thumbnails from the Viewport and save them as MetaData for the current Maya scene.
+    After that you can view the screenshot in the Content Browser.
+
+    Usage::
+
+        CaptureThumbnail()
+    '''
+
+    def __init__(self):
+        cmds.thumbnailCaptureComponent(capture=True,  # @UndefinedVariable
+                                       fileDialogCallback=('python("import fcore.ui.playblast as pb;'
+                                                           'pb.CaptureThumbnail.saveCapture()")'))
+
+    @staticmethod
+    def saveCapture():
+        cmds.thumbnailCaptureComponent(save=maya.cmds.file(query=True, sceneName=True))  # @UndefinedVariable
 
 
 def getModelPanel():
@@ -14,19 +36,13 @@ def getModelPanel():
     :return: the panel or an empty string if no panel is visible
     :rtype: str
     '''
-    mod_pan = cmds.getPanel(type='modelPanel')
-    if mod_pan is None:
-        mod_pan = []
-    foc_pan = cmds.getPanel(withFocus=True)
-    if foc_pan is None:
-        foc_pan = []
-    vis_pan = cmds.getPanel(visiblePanels=True)
-    if vis_pan is None:
-        vis_pan = []
+    mod_pan = cmds.getPanel(type='modelPanel') or []
+    foc_pan = cmds.getPanel(withFocus=True) or []
+    vis_pan = cmds.getPanel(visiblePanels=True) or []
 
     vis_mod_pan = list(set(mod_pan).intersection(set(vis_pan)))
 
-    if len(vis_mod_pan) == 0:
+    if not vis_mod_pan:
         # no modelPanel visible
         return ''
 
