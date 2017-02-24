@@ -1,7 +1,5 @@
 '''
-Created on 14.06.2016
-
-:author: Fabian
+This module initializes mayapy so everything is setup the right way.
 '''
 import os
 import sys
@@ -9,9 +7,10 @@ import sys
 import maya.cmds as cmds
 import atexit
 
+
 def uninitializeMayaPy():
-    print 'uninitialize Mayapy'
     maya.standalone.uninitialize()
+    print 'uninitialized Mayapy'
 
 MAYASTANDALONE_INITALIZED = False
 
@@ -38,4 +37,4 @@ if not hasattr(cmds, "about") and not MAYASTANDALONE_INITALIZED:
     atexit.register(uninitializeMayaPy)
 
 else:
-    print "Scipping initizalisation"
+    print "Skipping initialization"
