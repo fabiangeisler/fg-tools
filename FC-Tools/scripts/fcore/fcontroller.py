@@ -381,7 +381,7 @@ def spherifyUI():
     vertices = com.convertToVertices(cmds.ls(selection=True))
 
     positions = [cmds.pointPosition(vertex) for vertex in vertices]
-    midpoint = mx.averageVector(positions)
+    midpoint = mx.midpoint(positions)
 
     distances = [mx.distance(midpoint, pos) for pos in positions]
     averageDistance = mx.average(distances)

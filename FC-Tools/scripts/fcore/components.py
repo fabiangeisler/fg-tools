@@ -156,4 +156,4 @@ def getMidpoint(vertex_list):
     # The midpoint from an arbitrary number of vertices is the average of all their positions.
 
     positions = [cmds.pointPosition(vertex) for vertex in vertex_list]
-    return mx.averageVector(positions)
+    return mx.midpoint(positions)
