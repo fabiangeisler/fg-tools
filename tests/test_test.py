@@ -1,7 +1,4 @@
 '''
-Created on 12.06.2016
-
-:author: Fabian
 '''
 import unittest
 
