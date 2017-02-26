@@ -165,7 +165,7 @@ def initializeRuntimeCommands():
     createRunTimeCommand(commandName="fcPivotToSelection",
                          annotation="Moves the pivot to the middle of the selected components.",
                          command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.pivotToSelection()"),
+                                  "fctl.pivotToComponentSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
