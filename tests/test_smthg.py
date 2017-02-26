@@ -4,7 +4,10 @@ Created on 14.06.2016
 :author: Fabian
 '''
 import unittest
+
 import start
+start.initializeMayaPy()
+
 import maya.cmds as cmds
 
 
