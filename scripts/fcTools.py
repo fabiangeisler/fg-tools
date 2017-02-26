@@ -10,17 +10,18 @@ def initialize():
     '''
     Initializes the fcTools either from mayapy or regular maya.
     '''
-    os.environ["FC_SCRIPTS"] = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
-    os.environ["FC_ICONS"] = os.path.dirname(os.environ["FC_SCRIPTS"]) + "/icons/"
-
     import fcore.fcmds as fcmds
     fcmds.initFcModelingTools()
 
     if cmds.about(batch=True):
         print "Skipping initialization of UI"
     else:
+        scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
+        os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons/"
+
         import fcore.fcontroller as fctl
         fctl.initializeRuntimeCommands()
+
         import fcore.ui.fcMenu as fm
         fm.FcMenu()
 
