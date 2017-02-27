@@ -17,7 +17,7 @@ def initialize():
         print "Skipping initialization of UI"
     else:
         scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
-        os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons/"
+        os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons"
 
         import fcore.fcontroller as fctl
         fctl.initializeRuntimeCommands()
