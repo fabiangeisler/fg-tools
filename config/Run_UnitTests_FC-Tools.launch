@@ -4,7 +4,7 @@
 <booleanAttribute key="LAUNCH_CONFIG_OVERRIDE_PYUNIT_RUN_PARAMS_CHOICE" value="false"/>
 <intAttribute key="LAUNCH_CONFIG_OVERRIDE_TEST_RUNNER" value="0"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/FCZ_Scripts/FC-Tools/scripts/tests/test_main.py"/>
+<listEntry value="/FCZ_Scripts/tests/test_main.py"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -12,7 +12,7 @@
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:FCZ_Scripts/FC-Tools/scripts/tests/test_main.py}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:FCZ_Scripts/tests/test_main.py}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_OTHER_WORKING_DIRECTORY" value=""/>
 <stringAttribute key="org.python.pydev.debug.ATTR_INTERPRETER" value="__default"/>
 <stringAttribute key="org.python.pydev.debug.ATTR_PROJECT" value="FCZ_Scripts"/>
