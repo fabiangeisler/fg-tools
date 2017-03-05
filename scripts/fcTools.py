@@ -8,19 +8,23 @@ import maya.cmds as cmds
 
 def initialize():
     '''
-    Initializes the fcTools ether from mayapy or regular maya.
+    Initializes the fcTools either from mayapy or regular maya.
     '''
-    os.environ["FC_SCRIPTS"] = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
-    os.environ["FC_ICONS"] = os.path.dirname(os.environ["FC_SCRIPTS"]) + "/icons/"
-
     import fcore.fcmds as fcmds
     fcmds.initFcModelingTools()
 
     if cmds.about(batch=True):
-        print "Scipping initizalisation of UI"
+        print "Skipping initialization of UI"
     else:
+        scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
+        os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons"
+
+        os.environ["MAYA_PLUG_IN_PATH"] += ';' + os.path.dirname(scriptsDir) + "/plugins"
+        cmds.loadPlugin('fcToolCommands.py')
+
         import fcore.fcontroller as fctl
         fctl.initializeRuntimeCommands()
+
         import fcore.ui.fcMenu as fm
         fm.FcMenu()
 
@@ -56,4 +60,4 @@ def reloadPyModules(scriptPath):
         except Exception as error:
             print "ERROR:" + str(error)
         print "{0:3.0f}% loaded: reloading {1:s}".format(percent * i, modName)
-    print "Reloaded {0:d} Modules.".format(len(reloadModules)),
+    print "Reloaded {0:d} Modules.\n".format(len(reloadModules)),

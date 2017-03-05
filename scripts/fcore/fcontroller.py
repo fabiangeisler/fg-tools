@@ -110,25 +110,25 @@ def initializeRuntimeCommands():
     createRunTimeCommand(commandName="fcSpherify",
                          annotation="Move all selected components to equal distance to each other.",
                          command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.spherifyUI()"),
+                                  "fctl.spherify()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcMoveComponentsToXAxis",
                          annotation="Move all selected components so they're aligned on the x-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToXAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="x")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcMoveComponentsToYAxis",
                          annotation="Move all selected components so they're aligned on the y-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToYAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="y")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcMoveComponentsToZAxis",
                          annotation="Move all selected components so they're aligned on the z-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToZAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="z")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
@@ -165,7 +165,7 @@ def initializeRuntimeCommands():
     createRunTimeCommand(commandName="fcPivotToSelection",
                          annotation="Moves the pivot to the middle of the selected components.",
                          command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.pivotToSelection()"),
+                                  "fctl.pivotToComponentSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
@@ -243,10 +243,10 @@ def selectTriangles():
         cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print "Selected {0:d} Trangles".format(len(tris)),
+        print "Selected {0:d} Triangles.\n".format(len(tris)),
     else:
         cmds.selectMode(object=True)
-        print "Selection does not contain Trangles",
+        print "Selection does not contain Triangles!\n",
 
 
 def selectNGons():
@@ -257,10 +257,10 @@ def selectNGons():
         cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print "Selected {0:d} N-Gons".format(len(ngons)),
+        print "Selected {0:d} N-Gons.\n".format(len(ngons)),
     else:
         cmds.selectMode(object=True)
-        print "Selection does not contain N-Gons",
+        print "Selection does not contain N-Gons!\n",
 
 
 def selectLaminaFaces():
@@ -271,10 +271,10 @@ def selectLaminaFaces():
         cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print "Selected {0:d} lamina faces".format(len(lamina)),
+        print "Selected {0:d} lamina faces.\n".format(len(lamina)),
     else:
         cmds.selectMode(object=True)
-        print "Selection does not contain lamina faces",
+        print "Selection does not contain lamina faces!\n",
 
 
 def selectNonManifoldVertices():
@@ -307,10 +307,10 @@ def selectUVSeams():
         cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshEdge=True)
-        print "Selected {0:d} seam edges".format(len(seamEdges)),
+        print "Selected {0:d} seam edges.\n".format(len(seamEdges)),
     else:
         cmds.selectMode(object=True)
-        print "Selection does not seam edges.",
+        print "Selection does not seam edges.\n",
 
 
 def selectHardEdges():
@@ -329,15 +329,16 @@ def selectHardEdges():
         cmds.hilite(objs)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshEdge=True)
-        print "Selected {0:d} hard edges".format(len(hardEdges)),
+        print "Selected {0:d} hard edges.\n".format(len(hardEdges)),
     else:
         cmds.selectMode(object=True)
-        print "Selection does not hard edges.",
+        print "Selection does not hard edges.\n",
 
 
 def saveSnapshot(mode="project"):
     """
-    save a snapshot from the current model panel
+    save a snapshot from the current model panel.
+
     :param mode: "dialog": Save Snapshot with Dialog
                  "project": Save to Project Directory
                  "desktop": Save to Desktop
@@ -369,54 +370,22 @@ def saveSnapshot(mode="project"):
     pb.createViewportSnapshot(imageFile)
 
 
-def spherifyUI():
-    """
+def spherify():
+    '''
     puts selected Components to average Distance to their Midpoint
-    """
-    show_radius_dialog = False
-    mods = cmds.getModifiers()
-    if (mods & 1) > 0:  # when Shift is pressed show Dialog
-        show_radius_dialog = True
-
+    '''
     vertices = com.convertToVertices(cmds.ls(selection=True))
 
     positions = [cmds.pointPosition(vertex) for vertex in vertices]
-    midpoint = mx.averageVector(positions)
+    midpoint = mx.midpoint(positions)
 
     distances = [mx.distance(midpoint, pos) for pos in positions]
     averageDistance = mx.average(distances)
 
-    if show_radius_dialog:
-        result = cmds.promptDialog(title='Set Radius',
-                                   message='Enter Radius:',
-                                   text=averageDistance,
-                                   button=['OK'],
-                                   defaultButton='OK',
-                                   dismissString='Cancel')
-        if result == 'OK':
-            radius = float(cmds.promptDialog(query=True, text=True))
-    else:
-        radius = averageDistance
-
-    newPositions = mx.spherify(positions, radius)
+    newPositions = mx.spherify(positions, averageDistance)
 
     for vert, pos in zip(vertices, newPositions):
         cmds.move(pos[0], pos[1], pos[2], vert, a=True)
-
-
-def moveComponentsToXAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="x")
-
-
-def moveComponentsToYAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="y")
-
-
-def moveComponentsToZAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="z")
 
 
 def copyPivot():
@@ -466,7 +435,7 @@ def toggleWireframe():
 
 
 def assignDefaultShaderToSelection():
-    cmds.sets(e=True, forceElement="initialShadingGroup")
+    cmds.sets(edit=True, forceElement="initialShadingGroup")
 
 
 def toggleXrayDisplayOfSelection():

@@ -1,20 +1,23 @@
 '''
-some extend math functionality
+some extended math functionality
 '''
 import math
 
 
-def spherify(positions, radius):
+def spherify(points, radius):
     '''
-    puts selected Components to average Distance to their Midpoint
+    :param list points:
+    :param float radius:
+    :returns: The points with average distance to their midpoint.
+    :rtype: list[list[float]]
     '''
     resultPositions = []
 
-    midpoint = averageVector(positions)
-    distances = [distance(midpoint, pos) for pos in positions]
+    mid = midpoint(points)
+    distances = [distance(mid, pos) for pos in points]
 
-    midX, midY, midZ = midpoint
-    for pos, dist in zip(positions, distances):
+    midX, midY, midZ = mid
+    for pos, dist in zip(points, distances):
         if dist == 0:
             factor = 1
         else:
@@ -47,7 +50,7 @@ def average(numberList):
     return float(sum(numberList)) / max(len(numberList), 1)
 
 
-def averageVector(vectorList):
+def midpoint(vectorList):
     '''
     :param list vectorList: The list of vectors in the format [[x, y, z], [...]].
     :returns: The average Vector from the given list of vectors. An empty vectorList returns [0.0, 0.0, 0.0]

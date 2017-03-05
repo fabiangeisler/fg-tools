@@ -1,25 +1,27 @@
-# Fabian Czichelski's Personal Script Arsenal
+# FC Tools
 
-This is a collection of some handy (modeling-) tools in maya. If you run the code
-you will get a small extra menu with all available commands. All of these commands
-are also available as runtimeCommands so you can assign hot-keys to it.
+This is a collection of some handy (modeling-) tools in Maya.
+After installation you will get a small extra menu ("FC Tools") where you can find all available commands.
+You can assign hot-keys to them if you want to.
 
-If you want to use these tools you must first clone this repository to your local
-harddrive. After that you have to open Maya and ether execute this script in the
-scripteditor.
+## Installation
+* Clone this repository to your local harddrive.
+* Open Maya and execute this script in the scripteditor:
 
-```python
-import sys
-fcToolPath = "X:/PATH/TO/FC-Tools/scripts"
+  ```python
+  import sys
+  fcToolPath = "X:/PATH/TO/FC-Tools/scripts"
 
-if fcToolPath not in sys.path:
-    sys.path.append(fcToolPath)
+  if fcToolPath not in sys.path:
+      sys.path.append(fcToolPath)
 
-import fcTools
-fcTools.initialize()
-```
-I recommend to but this in a shelf button or in the userSetup.py.
-Also note that this is save to execute in batchmode.
+  import fcTools
+  fcTools.initialize()
+  ```
+* Thats's it! :)
+
+I recommend to put this in a shelf button or in the userSetup.py.
+Also note that this is save to execute in batch-mode. The UI creation simply be skipped in that case.
 
 Supported Platforms: **Windows**
 
