@@ -19,6 +19,9 @@ def initialize():
         scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
         os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons"
 
+        os.environ["MAYA_PLUG_IN_PATH"] += ';' + os.path.dirname(scriptsDir) + "/plugins"
+        cmds.loadPlugin('fcToolCommands.py')
+
         import fcore.fcontroller as fctl
         fctl.initializeRuntimeCommands()
 
