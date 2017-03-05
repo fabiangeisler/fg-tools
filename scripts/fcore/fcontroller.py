@@ -115,20 +115,20 @@ def initializeRuntimeCommands():
 
     createRunTimeCommand(commandName="fcMoveComponentsToXAxis",
                          annotation="Move all selected components so they're aligned on the x-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToXAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="x")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcMoveComponentsToYAxis",
                          annotation="Move all selected components so they're aligned on the y-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToYAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="y")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcMoveComponentsToZAxis",
                          annotation="Move all selected components so they're aligned on the z-axis.",
-                         command=("import fcore.fcontroller as fctl\n"
-                                  "fctl.moveComponentsToZAxis()"),
+                         command=('import maya.cmds as cmds\n'
+                                  'cmds.fcAverageComponents(axis="z")'),
                          category=category)
 
     createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
@@ -386,21 +386,6 @@ def spherify():
 
     for vert, pos in zip(vertices, newPositions):
         cmds.move(pos[0], pos[1], pos[2], vert, a=True)
-
-
-def moveComponentsToXAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="x")
-
-
-def moveComponentsToYAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="y")
-
-
-def moveComponentsToZAxis():
-    sel = cmds.ls(selection=True)
-    mdl.moveComponentsToAxis(sel, axis="z")
 
 
 def copyPivot():
