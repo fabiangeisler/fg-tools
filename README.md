@@ -8,20 +8,20 @@ You can assign hot-keys to them if you want to.
 * Clone this repository to your local harddrive.
 * Open Maya and execute this script in the scripteditor:
 
-  ```python
-  import sys
-  fcToolPath = "X:/PATH/TO/FC-Tools/scripts"
+```python
+import sys
+fcToolPath = "X:/PATH/TO/FC-Tools/scripts"
 
-  if fcToolPath not in sys.path:
-      sys.path.append(fcToolPath)
+if fcToolPath not in sys.path:
+    sys.path.append(fcToolPath)
 
-  import fcTools
-  fcTools.initialize()
-  ```
+import fcTools
+fcTools.initialize()
+```
 * Thats's it! :)
 
 I recommend to put this in a shelf button or in the userSetup.py.
-Also note that this is save to execute in batch-mode. The UI creation simply be skipped in that case.
+Also note that this is save to execute in batch-mode. The UI creation will be skipped in that case.
 
 Supported Platforms: **Windows**
 
