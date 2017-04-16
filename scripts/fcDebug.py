@@ -1,32 +1,7 @@
 '''
-This module is the entry point for the fcTools library.
+Functions for debugging purposes.
 '''
-import os
 import sys
-import maya.cmds as cmds
-
-
-def initialize():
-    '''
-    Initializes the fcTools either from mayapy or regular maya.
-    '''
-    import fcore.fcmds as fcmds
-    fcmds.initFcModelingTools()
-
-    if cmds.about(batch=True):
-        print "Skipping initialization of UI"
-    else:
-        scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
-        os.environ["XBMLANGPATH"] += ';' + os.path.dirname(scriptsDir) + "/icons"
-
-        os.environ["MAYA_PLUG_IN_PATH"] += ';' + os.path.dirname(scriptsDir) + "/plugins"
-        cmds.loadPlugin('fcToolCommands.py')
-
-        import fcore.fcontroller as fctl
-        fctl.initializeRuntimeCommands()
-
-        import fcore.ui.fcMenu as fm
-        fm.FcMenu()
 
 
 def reloadPyModules(scriptPath):

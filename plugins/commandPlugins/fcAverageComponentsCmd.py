@@ -3,7 +3,7 @@
 """
 
 import maya.api.OpenMaya as om
-import fcore.modeling as mdl
+import fcTools.modeling as mdl
 
 maya_useNewAPI = True
 

@@ -22,7 +22,7 @@ class CaptureThumbnail(object):
 
     def __init__(self):
         cmds.thumbnailCaptureComponent(capture=True,  # @UndefinedVariable
-                                       fileDialogCallback=('python("import fcore.ui.playblast as pb;'
+                                       fileDialogCallback=('python("import fcTools.ui.playblast as pb;'
                                                            'pb.CaptureThumbnail.saveCapture()")'))
 
     @staticmethod

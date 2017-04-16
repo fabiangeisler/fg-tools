@@ -29,87 +29,87 @@ def initializeRuntimeCommands():
     category = "FC-Tools.File"
     createRunTimeCommand(commandName="fcSmartOpen",
                          annotation="open a maya file and try to guess the project along the way",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.smartOpen()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcReloadScene",
                          annotation="Reload the currently open scene.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.reloadScene()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSaveIncremental",
                          annotation="save the current maya file under a new version",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.saveIncremental()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSaveSnapshot",
                          annotation="create a snapshot of the vieport and save it in the render folder.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.saveSnapshot()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcOpenSceneFolder",
                          annotation="open the current folder from this maya scene",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.openSceneFolder()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcOpenRenderFolder",
                          annotation="open the folder where images will be rendered to",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.openRenderFolder()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcOpenTextureFolder",
                          annotation="open the texture folder",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.openTextureFolder()"),
                          category=category)
 
     category = "FC-Tools.Selection"
     createRunTimeCommand(commandName="fcSelectTriangles",
                          annotation="select all triangles based on your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectTriangles()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSelectNGons",
                          annotation="select all n-gons based on your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectNGons()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSelectLaminaFaces",
                          annotation="select all lamina faces in your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectLaminaFaces()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSelectNonManifoldVertices",
                          annotation="select all non-manifold vertices in your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectNonManifoldVertices()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSelectUVSeams",
                          annotation="select all uv-seams in your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectUVSeams()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcSelectHardEdges",
                          annotation="select all hard edges in your current selection",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.selectHardEdges()"),
                          category=category)
 
     category = "FC-Tools.Modeling"
     createRunTimeCommand(commandName="fcSpherify",
                          annotation="Move all selected components to equal distance to each other.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.spherify()"),
                          category=category)
 
@@ -133,51 +133,51 @@ def initializeRuntimeCommands():
 
     createRunTimeCommand(commandName="fcAssignDefaultShaderToSelection",
                          annotation='Assign the Default Shader "lambert1" to all selected objects.',
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.assignDefaultShaderToSelection()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcToggleXrayDisplayOfSelection",
                          annotation="Toggle X-Ray display in the viewport on all selected objects.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.toggleXrayDisplayOfSelection()"),
                          category=category)
 
     category = "FC-Tools.Pivots"
     createRunTimeCommand(commandName="fcCopyPivot",
                          annotation="Copies the pivot of the selected object.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.copyPivot()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcPastePivot",
                          annotation="Pastes the pivot to all selected objects.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.pastePivot()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcPivotsToWorldCenter",
                          annotation="Moves the pivots of all selected objects to the world-center.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.pivotsToWorldCenter()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcPivotToSelection",
                          annotation="Moves the pivot to the middle of the selected components.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.pivotToComponentSelection()"),
                          category=category)
 
     category = "FC-Tools.Display"
     createRunTimeCommand(commandName="fcToggleSmoothShaded",
                          annotation="Toggles smooth shading in the current viewport.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.toggleSmoothShaded()"),
                          category=category)
 
     createRunTimeCommand(commandName="fcToggleWireframe",
                          annotation="Toggles wireframe in the current viewport.",
-                         command=("import fcore.fcontroller as fctl\n"
+                         command=("import fcTools.fcontroller as fctl\n"
                                   "fctl.toggleWireframe()"),
                          category=category)
 
