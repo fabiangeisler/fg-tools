@@ -16,7 +16,7 @@ You can assign hot-keys to them if you want to.
       sys.path.append(fcToolPath)
 
   import fcTools
-  fcTools.initialize()
+  fcTools.createMenu()
   ```
 * Thats's it! :)
 

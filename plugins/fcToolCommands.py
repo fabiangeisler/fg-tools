@@ -15,6 +15,5 @@ def initializePlugin(plugin):
 
 
 def uninitializePlugin(plugin):
-
     pluginFn = om.MFnPlugin(plugin)
     pluginFn.deregisterCommand(FcAverageComponentsCmd.cmdName)
