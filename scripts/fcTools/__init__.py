@@ -10,7 +10,6 @@ import components as com
 import fileSystem as fs
 import mathExtended as mx
 import mayaRuntimeCommand as mrc
-import ui.playblast as pb
 import modeling as mdl
 import pivot as piv
 
@@ -21,7 +20,7 @@ def initialize():
     '''
     Initializes the fcTools either from mayapy or regular maya.
     '''
-    scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
+    scriptsDir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))).replace('\\', '/')
     os.environ['MAYA_PLUG_IN_PATH'] += ';' + os.path.dirname(scriptsDir) + '/plugins'
     cmds.loadPlugin('fcToolCommands.py')
 
@@ -51,186 +50,148 @@ def initializeRuntimeCommands():
     '''
     creates all runtimeCommands
     '''
-    category = 'FC-Tools'
-    subcategory = 'File'
+    mainCategory = 'FC-Tools'
+    category = mainCategory + '.File'
     mrc.createRuntimeCommand(commandName='fcSmartOpen',
                              annotation='open a maya file and try to guess the project along the way',
                              command=('import fcTools\n'
                                       'fcTools.smartOpen()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcReloadScene',
                              annotation='Reload the currently open scene.',
                              command=('import fcTools\n'
                                       'fcTools.reloadScene()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSaveIncremental',
                              annotation='save the current maya file under a new version',
                              command=('import fcTools\n'
                                       'fcTools.saveIncremental()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSaveSnapshot',
-                             annotation='create a snapshot of the vieport and save it in the render folder.',
-                             command=('import fcTools\n'
-                                      'fcTools.saveSnapshot()'),
-                             category=category,
-                             subcategory=subcategory)
+                             annotation='create a snapshot of the viewport and save it in the render folder.',
+                             command=('import fcTools.ui\n'
+                                      'fcTools.ui.saveSnapshot()'),
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcOpenSceneFolder',
                              annotation='open the current folder from this maya scene',
                              command=('import fcTools\n'
                                       'fcTools.openSceneFolder()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcOpenRenderFolder',
                              annotation='open the folder where images will be rendered to',
                              command=('import fcTools\n'
                                       'fcTools.openRenderFolder()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcOpenTextureFolder',
                              annotation='open the texture folder',
                              command=('import fcTools\n'
                                       'fcTools.openTextureFolder()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
-    subcategory = 'Selection'
+    category = mainCategory + '.Selection'
     mrc.createRuntimeCommand(commandName='fcSelectTriangles',
                              annotation='select all triangles based on your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectTriangles()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSelectNGons',
                              annotation='select all n-gons based on your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectNGons()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSelectLaminaFaces',
                              annotation='select all lamina faces in your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectLaminaFaces()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSelectNonManifoldVertices',
                              annotation='select all non-manifold vertices in your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectNonManifoldVertices()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSelectUVSeams',
                              annotation='select all uv-seams in your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectUVSeams()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcSelectHardEdges',
                              annotation='select all hard edges in your current selection',
                              command=('import fcTools\n'
                                       'fcTools.selectHardEdges()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
-    subcategory = 'Modeling'
+    category = mainCategory + '.Modeling'
     mrc.createRuntimeCommand(commandName='fcSpherify',
                              annotation='Move all selected components to equal distance to each other.',
                              command=('import fcTools\n'
                                       'fcTools.spherify()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcMoveComponentsToXAxis',
                              annotation='Move all selected components so they\'re aligned on the x-axis.',
                              command=('import maya.cmds as cmds\n'
                                       'cmds.fcAverageComponents(axis="x")'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcMoveComponentsToYAxis',
                              annotation='Move all selected components so they\'re aligned on the y-axis.',
                              command=('import maya.cmds as cmds\n'
                                       'cmds.fcAverageComponents(axis="y")'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcMoveComponentsToZAxis',
                              annotation='Move all selected components so they\'re aligned on the z-axis.',
                              command=('import maya.cmds as cmds\n'
                                       'cmds.fcAverageComponents(axis="z")'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcAssignDefaultShaderToSelection',
                              annotation='Assign the Default Shader "lambert1" to all selected objects.',
                              command=('import fcTools\n'
                                       'fcTools.assignDefaultShaderToSelection()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcToggleXrayDisplayOfSelection',
                              annotation='Toggle X-Ray display in the viewport on all selected objects.',
                              command=('import fcTools\n'
                                       'fcTools.toggleXrayDisplayOfSelection()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
-    subcategory = 'Pivots'
+    category = mainCategory + '.Pivots'
     mrc.createRuntimeCommand(commandName='fcCopyPivot',
                              annotation='Copies the pivot of the selected object.',
                              command=('import fcTools\n'
                                       'fcTools.copyPivot()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcPastePivot',
                              annotation='Pastes the pivot to all selected objects.',
                              command=('import fcTools\n'
                                       'fcTools.pastePivot()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcPivotsToWorldCenter',
                              annotation='Moves the pivots of all selected objects to the world-center.',
                              command=('import fcTools\n'
                                       'fcTools.pivotsToWorldCenter()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
     mrc.createRuntimeCommand(commandName='fcPivotToSelection',
                              annotation='Moves the pivot to the middle of the selected components.',
                              command=('import fcTools\n'
                                       'fcTools.pivotToComponentSelection()'),
-                             category=category,
-                             subcategory=subcategory)
-
-    subcategory = 'Display'
-    mrc.createRuntimeCommand(commandName='fcToggleSmoothShaded',
-                             annotation='Toggles smooth shading in the current viewport.',
-                             command=('import fcTools\n'
-                                      'fcTools.toggleSmoothShaded()'),
-                             category=category,
-                             subcategory=subcategory)
-
-    mrc.createRuntimeCommand(commandName='fcToggleWireframe',
-                             annotation='Toggles wireframe in the current viewport.',
-                             command=('import fcTools\n'
-                                      'fcTools.toggleWireframe()'),
-                             category=category,
-                             subcategory=subcategory)
+                             category=category)
 
 
 def smartOpen():
@@ -386,41 +347,6 @@ def selectHardEdges():
         print 'Selection does not hard edges.\n',
 
 
-def saveSnapshot(mode='project'):
-    '''
-    save a snapshot from the current model panel.
-
-    :param mode: 'dialog': Save Snapshot with Dialog
-                 'project': Save to Project Directory
-                 'desktop': Save to Desktop
-    '''
-    p = pb.getModelPanel()
-    cam_name = cmds.modelEditor(p, q=True, camera=True)
-    curr_file_name = cmds.file(q=True, sn=True, shn=True)
-    nice_file_name = '{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'.format(datetime.datetime.now(),
-                                                            curr_file_name.strip('.ma'),
-                                                            cam_name)
-
-    desktopFolder = fs.getDesktopFolder()
-    imageFile = desktopFolder + nice_file_name + '.jpg'
-    if mode == 'project':
-        imagesFolder = fs.getRenderFolder()
-        imageFile = imagesFolder + nice_file_name + '.jpg'
-    elif mode == 'dialog':
-        imageFile = cmds.fileDialog2(cap='Save Screengrab',
-                                     fileFilter='JPEG (*.jpg);;TIFF (*.tif)',
-                                     startingDirectory=imageFile,
-                                     fileMode=0,
-                                     okCaption='Save',
-                                     dialogStyle=2)
-        if imageFile is not None:
-            imageFile = imageFile[0]
-        else:
-            return
-    print imageFile
-    pb.createViewportSnapshot(imageFile)
-
-
 def spherify():
     '''
     puts selected Components to average Distance to their Midpoint
@@ -471,18 +397,6 @@ def pivotsToWorldCenter():
     sel = cmds.ls(selection=True)
     for obj in sel:
         piv.pivotToWorldCenter(obj)
-
-
-def toggleSmoothShaded():
-    mdlEditor = pb.getModelPanel()
-    if mdlEditor:
-        pb.toggleSmoothShaded(mdlEditor)
-
-
-def toggleWireframe():
-    mdlEditor = pb.getModelPanel()
-    if mdlEditor:
-        pb.toggleWireframe(mdlEditor)
 
 
 def assignDefaultShaderToSelection():
