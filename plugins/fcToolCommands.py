@@ -2,18 +2,14 @@
 
 '''
 import maya.api.OpenMaya as om
-from commandPlugins.fcAverageComponentsCmd import FcAverageComponentsCmd
+import commandPlugins.fcAverageComponentsCmd
 
 maya_useNewAPI = True
 
 
 def initializePlugin(plugin):
-    pluginFn = om.MFnPlugin(plugin)
-    pluginFn.registerCommand(FcAverageComponentsCmd.cmdName,
-                             FcAverageComponentsCmd.creator,
-                             FcAverageComponentsCmd.createSyntax)
+    commandPlugins.fcAverageComponentsCmd.initializePlugin(plugin=plugin)
 
 
 def uninitializePlugin(plugin):
-    pluginFn = om.MFnPlugin(plugin)
-    pluginFn.deregisterCommand(FcAverageComponentsCmd.cmdName)
+    commandPlugins.fcAverageComponentsCmd.uninitializePlugin(plugin=plugin)
