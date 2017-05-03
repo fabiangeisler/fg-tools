@@ -2,12 +2,11 @@
 This module contains functions for making playblasts and screenshots from
 modelpanels in Maya. Because of this GUI dependency this should not be loaded in batch mode.
 '''
-from pymel import core
-import maya.cmds as cmds
 import os
 import datetime
 
-import maya.cmds
+from pymel import core
+import maya.cmds as cmds
 
 
 class CaptureThumbnail(object):
@@ -134,6 +133,10 @@ def createViewportSnapshot(imageFile):
     creates a snapshot from the current Viewport and saves it to the specified path
     :param str imageFile: the full path for the image file.
     '''
+    imageDir = os.path.dirname(imageFile)
+    if not os.path.exists(imageDir):
+        os.makedirs(imageDir)
+
     cmds.playblast(frame=core.currentTime(query=True),
                    format='image',
                    compression=imageFile.split('.')[-1].lower(),
