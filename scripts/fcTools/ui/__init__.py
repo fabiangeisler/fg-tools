@@ -64,8 +64,8 @@ def saveSnapshot(mode='project'):
                  'desktop': Save to Desktop
     '''
     p = pb.getModelPanel()
-    cam_name = cmds.modelEditor(p, q=True, camera=True)
-    curr_file_name = cmds.file(q=True, sn=True, shn=True)
+    cam_name = cmds.modelEditor(p, query=True, camera=True).replace(':', '_')
+    curr_file_name = cmds.file(query=True, sceneName=True, shortName=True)
     nice_file_name = '{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'.format(datetime.datetime.now(),
                                                             curr_file_name.strip('.ma'),
                                                             cam_name)
