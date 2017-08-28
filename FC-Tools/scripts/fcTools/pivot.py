@@ -5,37 +5,54 @@ import maya.cmds as cmds
 import components as com
 
 
-gROTATEPIVOT = [0.0, 0.0, 0.0]
-gSCALEPIVOT = [0.0, 0.0, 0.0]
+ROTATE_PIVOT = [0.0, 0.0, 0.0]
+SCALE_PIVOT = [0.0, 0.0, 0.0]
 
 
-def pivotToComponents(components):
+def move_pivot_to_components(components):
     """
     puts the Pivot to the current component selection
+
+    :param list[str] components: A list of components.
     """
     vertices = com.convertToVertices(components)
     shape = vertices[0].split('.')[0]
     transform = cmds.listRelatives(shape, parent=True)[0]
 
-    midX, midY, midZ = com.getMidpoint(vertices)
+    mid_x, mid_y, mid_z = com.getMidpoint(vertices)
 
-    cmds.move(midX, midY, midZ, transform + '.scalePivot')
-    cmds.move(midX, midY, midZ, transform + '.rotatePivot')
+    cmds.move(mid_x, mid_y, mid_z, transform + '.scalePivot')
+    cmds.move(mid_x, mid_y, mid_z, transform + '.rotatePivot')
 
 
-def pivotToWorldCenter(obj):
+def move_pivot_to_world_center(obj):
+    """
+    Moves the pivot if the given object to the world center
+
+    :param str obj:
+    """
     cmds.move(0, 0, 0, obj + '.scalePivot')
     cmds.move(0, 0, 0, obj + '.rotatePivot')
 
 
-def copyPivot(obj):
-    global gROTATEPIVOT
-    global gSCALEPIVOT
+def copy_pivot(obj):
+    """
+    Saves the pivot location from the given object temporally to apply it later via paste_pivot()
 
-    gROTATEPIVOT = cmds.xform(obj, query=True, worldSpace=True, rotatePivot=True)
-    gSCALEPIVOT = cmds.xform(obj, query=True, worldSpace=True, scalePivot=True)
+    :param str obj:
+    """
+    global ROTATE_PIVOT
+    global SCALE_PIVOT
+
+    ROTATE_PIVOT = cmds.xform(obj, query=True, worldSpace=True, rotatePivot=True)
+    SCALE_PIVOT = cmds.xform(obj, query=True, worldSpace=True, scalePivot=True)
 
 
-def pastePivot(obj):
-    cmds.xform(obj, worldSpace=True, rotatePivot=gROTATEPIVOT)
-    cmds.xform(obj, worldSpace=True, scalePivot=gSCALEPIVOT)
+def paste_pivot(obj):
+    """
+    Applies he previously saved pivot to the given object.
+
+    :param str obj:
+    """
+    cmds.xform(obj, worldSpace=True, rotatePivot=ROTATE_PIVOT)
+    cmds.xform(obj, worldSpace=True, scalePivot=SCALE_PIVOT)

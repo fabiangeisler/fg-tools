@@ -362,7 +362,7 @@ def spherify():
 
 def copyPivot():
     sel = cmds.ls(selection=True, o=True)
-    piv.copyPivot(sel[0])
+    piv.copy_pivot(sel[0])
 
     print 'Saved Pivot from: ' + sel[0],
 
@@ -370,7 +370,7 @@ def copyPivot():
 def pastePivot():
     sel = cmds.ls(selection=True, o=True)
     for obj in sel:
-        piv.pastePivot(obj)
+        piv.paste_pivot(obj)
     cmds.selectMode(object=True)
 
     print 'Applied Pivot to:    ' + str(sel),
@@ -381,7 +381,7 @@ def pivotToComponentSelection():
     puts the Pivot to the current component selection
     """
     sel = cmds.ls(selection=True, fl=True)
-    piv.pivotToComponents(sel)
+    piv.move_pivot_to_components(sel)
     cmds.selectMode(object=True)
 
 
@@ -391,7 +391,7 @@ def pivotsToWorldCenter():
     """
     sel = cmds.ls(selection=True)
     for obj in sel:
-        piv.pivotToWorldCenter(obj)
+        piv.move_pivot_to_world_center(obj)
 
 
 def assignDefaultShaderToSelection():
