@@ -20,13 +20,13 @@ class CaptureThumbnail(object):
     """
 
     def __init__(self):
-        cmds.thumbnailCaptureComponent(capture=True,  # @UndefinedVariable
+        cmds.thumbnailCaptureComponent(capture=True,
                                        fileDialogCallback=('python("import fcTools.ui.playblast as pb;'
                                                            'pb.CaptureThumbnail.saveCapture()")'))
 
     @staticmethod
     def saveCapture():
-        cmds.thumbnailCaptureComponent(save=maya.cmds.file(query=True, sceneName=True))  # @UndefinedVariable
+        cmds.thumbnailCaptureComponent(save=cmds.file(query=True, sceneName=True))
 
 
 def getModelPanel():

@@ -1,8 +1,6 @@
 """
 This module is the entry point for the fcTools library.
 """
-import os
-import datetime
 
 import maya.cmds as cmds
 

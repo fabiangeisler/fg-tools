@@ -7,7 +7,7 @@ import maya.cmds as cmds
 def removePlugin(pluginName):
     """
     This tries to unload the given plugin from maya by deleting all its registered nodes first
-    and the unload the plugin. There is still no garantie that this will work.
+    and the unload the plugin. There is still no guarantee that this will work.
 
     :param str pluginName: The name of the plugin
     """
@@ -84,7 +84,7 @@ class UserSelection(object):
     ..Example::
 
         with UserSelection() as us:
-            # in this codeblock you can select whatever you want.
+            # in this code block you can select whatever you want.
             cmds.select(cmds.ls())
             # if you still have the need to know what the user selected you can query that.
             print us
