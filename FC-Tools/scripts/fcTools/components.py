@@ -4,7 +4,7 @@ This module collects all functions that have something to do with polygon object
 """
 import maya.cmds as cmds
 import util
-import mathExtended as mx
+import math_extended as mx
 
 
 def convertToVertices(componentList):

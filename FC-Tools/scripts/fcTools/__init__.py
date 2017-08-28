@@ -6,7 +6,7 @@ import maya.cmds as cmds
 
 import components as com
 import fileSystem as fs
-import mathExtended as mx
+import math_extended as mx
 import mayaRuntimeCommand as mrc
 import modeling as mdl
 import pivot as piv
