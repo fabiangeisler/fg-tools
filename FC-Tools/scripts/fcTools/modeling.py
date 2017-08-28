@@ -1,14 +1,14 @@
-'''
+"""
 This module collects functions that are handy for modeling.
-'''
+"""
 import maya.cmds as cmds
 import components as com
 
 
 def moveComponentsToAxis(components, axis='x'):
-    '''
+    """
     puts selected Components to the average of the specified axis
-    '''
+    """
     vertices = com.convertToVertices(components)
     aver = com.getMidpoint(vertices)
 
@@ -21,9 +21,9 @@ def moveComponentsToAxis(components, axis='x'):
 
 
 def freezeTransforms():
-    '''
+    """
     Tries to freeze the transforms of the current selection.
-    '''
+    """
     try:
         cmds.makeIdentity(apply=True, translate=True)
     except Exception as fail:
@@ -41,10 +41,10 @@ def freezeTransforms():
 
 
 def toggleXRayDisplay(objects):
-    '''
+    """
     Toggles the XRay display in the viewport of the given objects.
     :param list objects:
-    '''
+    """
     if objects:
         xrayStatus = not cmds.displaySurface(objects[0], query=True, xRay=True)[0]
         for obj in objects:

@@ -1,6 +1,6 @@
-'''
+"""
 This module is the entry point for the fcTools library.
-'''
+"""
 import os
 import datetime
 
@@ -17,11 +17,11 @@ __FcToolsInitialized = False
 
 
 def initialize():
-    '''
+    """
     Initializes the fcTools either from mayapy or regular maya.
-    '''
-    scriptsDir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))).replace('\\', '/')
-    os.environ['MAYA_PLUG_IN_PATH'] += ';' + os.path.dirname(scriptsDir) + '/plugins'
+    """
+    global __FcToolsInitialized
+
     cmds.loadPlugin('fcToolCommands.py')
 
     initializeRuntimeCommands()
@@ -30,26 +30,23 @@ def initialize():
 
 
 def createMenu():
-    '''
+    """
     Creates the Menu to access the FC-Tools from the GUI.
 
     :raises:
         :RuntimeError: When you call this in batch mode.
-    '''
+    """
     if cmds.about(batch=True):
         raise RuntimeError('The menu for FC Tools can not be created in batch-mode.')
     else:
-        scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
-        os.environ['XBMLANGPATH'] += ';' + os.path.dirname(scriptsDir) + '/icons'
-
         import ui.fcMenu as fm
         fm.FcMenu()
 
 
 def initializeRuntimeCommands():
-    '''
+    """
     creates all runtimeCommands
-    '''
+    """
     mainCategory = 'FC-Tools'
     category = mainCategory + '.File'
     mrc.createRuntimeCommand(commandName='fcSmartOpen',
@@ -304,9 +301,9 @@ def selectNonManifoldVertices():
 
 
 def selectUVSeams():
-    '''
+    """
     select the UV Seams on all selected objects.
-    '''
+    """
     cmds.selectMode(object=True)
 
     seamEdges = []
@@ -326,9 +323,9 @@ def selectUVSeams():
 
 
 def selectHardEdges():
-    '''
+    """
     select the hard edges on all selected objects.
-    '''
+    """
     cmds.selectMode(object=True)
 
     hardEdges = []
@@ -348,9 +345,9 @@ def selectHardEdges():
 
 
 def spherify():
-    '''
+    """
     puts selected Components to average Distance to their Midpoint
-    '''
+    """
     vertices = com.convertToVertices(cmds.ls(selection=True))
 
     positions = [cmds.pointPosition(vertex) for vertex in vertices]
@@ -382,18 +379,18 @@ def pastePivot():
 
 
 def pivotToComponentSelection():
-    '''
+    """
     puts the Pivot to the current component selection
-    '''
+    """
     sel = cmds.ls(selection=True, fl=True)
     piv.pivotToComponents(sel)
     cmds.selectMode(object=True)
 
 
 def pivotsToWorldCenter():
-    '''
+    """
     Moves all pivots from the selected objects to the world center
-    '''
+    """
     sel = cmds.ls(selection=True)
     for obj in sel:
         piv.pivotToWorldCenter(obj)
@@ -404,9 +401,9 @@ def assignDefaultShaderToSelection():
 
 
 def toggleXrayDisplayOfSelection():
-    '''
+    """
     Toggles the XRay display in the viewport of the selected objects.
-    '''
+    """
     # this flag combination gives you all surface shapes below the selected surface shape
     sel = cmds.ls(selection=True, allPaths=True, dagObjects=True, type='surfaceShape')
     mdl.toggleXRayDisplay(objects=sel)

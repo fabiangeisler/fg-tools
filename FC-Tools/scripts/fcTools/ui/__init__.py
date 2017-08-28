@@ -1,5 +1,5 @@
-'''
-'''
+"""
+"""
 import os
 
 import maya.cmds as cmds
@@ -13,33 +13,32 @@ __FcToolsUIInitialized = False
 
 
 def initialize():
-    '''
+    """
     Initializes the fcTools either from mayapy or regular maya.
-    '''
+    """
+    global __FcToolsUIInitialized
+
     if cmds.about(batch=True):
         raise RuntimeError('The menu for FC Tools can not be created in batch-mode.')
     else:
-        scriptsDir = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')
-        os.environ['XBMLANGPATH'] += ';' + os.path.dirname(scriptsDir) + '/icons'
-
         initializeRuntimeCommands()
 
         __FcToolsUIInitialized = True
 
 
 def initializeRuntimeCommands():
-    '''
+    """
     creates all runtimeCommands
-    '''
+    """
     mainCategory = 'FC-Tools'
-    #=======================================================================================================================================
+    # ==================================================================================================================
     # category = mainCategory + '.File'
     # mrc.createRuntimeCommand(commandName='fcSmartOpen',
     #                          annotation='open a maya file and try to guess the project along the way',
     #                          command=('import fcTools\n'
     #                                   'fcTools.smartOpen()'),
     #                          category=category)
-    #=======================================================================================================================================
+    # ==================================================================================================================
 
     category = mainCategory + '.Display'
     mrc.createRuntimeCommand(commandName='fcToggleSmoothShaded',
@@ -56,13 +55,13 @@ def initializeRuntimeCommands():
 
 
 def saveSnapshot(mode='project'):
-    '''
+    """
     save a snapshot from the current model panel.
 
     :param mode: 'dialog': Save Snapshot with Dialog
                  'project': Save to Project Directory
                  'desktop': Save to Desktop
-    '''
+    """
     p = pb.getModelPanel()
     cam_name = cmds.modelEditor(p, query=True, camera=True).replace(':', '_')
     curr_file_name = cmds.file(query=True, sceneName=True, shortName=True)

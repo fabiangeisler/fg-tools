@@ -1,16 +1,16 @@
-'''
+"""
 little utility functions for this and that.
-'''
+"""
 import maya.cmds as cmds
 
 
 def removePlugin(pluginName):
-    '''
+    """
     This tries to unload the given plugin from maya by deleting all its registered nodes first
     and the unload the plugin. There is still no garantie that this will work.
 
     :param str pluginName: The name of the plugin
-    '''
+    """
     if cmds.pluginInfo(pluginName, q=True, loaded=True):
         cmds.pluginInfo(pluginName, e=True, autoload=False)
 
@@ -30,23 +30,23 @@ def removePlugin(pluginName):
 
 
 def getUpstreamNodes(node):
-    '''
+    """
     :param str node:
     :returns: all upstream nodes of the given node
     :rtype: list
-    '''
-    def getInputs(node):
-        inputs = cmds.listConnections(node, source=True, destination=False)
+    """
+    def getInputs(obj):
+        inputs = cmds.listConnections(obj, source=True, destination=False)
         if inputs is not None:
             return set(inputs)
         return set()
 
-    def getRecursiveInputs(node, parentResults=None):
+    def getRecursiveInputs(obj, parentResults=None):
         if parentResults is None:
             parentResults = set()
-        results = getInputs(node)
+        results = getInputs(obj)
         if results:
-            results.add(node)
+            results.add(obj)
             relevantResults = results - parentResults
             for inputNode in relevantResults:
                 results = results.union(getRecursiveInputs(inputNode, results))
@@ -58,7 +58,7 @@ def getUpstreamNodes(node):
 
 
 def attrChangedBetween(attr, start, end):
-    '''
+    """
     Takes the given attribute and checks if it changes between
     the given time range. This is helpful to check whether an object is animated regardless if its parented, constrained
     or has animationcurves.
@@ -68,7 +68,7 @@ def attrChangedBetween(attr, start, end):
     :param int end: The end frame for the check.
     :returns: Whether the attribute changed.
     :rType: boolean
-    '''
+    """
     tmp = cmds.getAttr(attr, time=start)
     for frame in range(start + 1, end + 1):
         tmp2 = cmds.getAttr(attr, time=frame)
@@ -78,7 +78,7 @@ def attrChangedBetween(attr, start, end):
 
 
 class UserSelection(object):
-    '''
+    """
     A context-manager to preserve the current selection of the user.
 
     ..Example::
@@ -89,9 +89,10 @@ class UserSelection(object):
             # if you still have the need to know what the user selected you can query that.
             print us
         # here the last user selection is restored
-    '''
+    """
 
-    def _getSelectMode(self):
+    @staticmethod
+    def _getSelectMode():
         if cmds.selectMode(q=True, object=True):
             return "object"
         elif cmds.selectMode(q=True, component=True):
@@ -107,7 +108,8 @@ class UserSelection(object):
         elif cmds.selectMode(q=True, preset=True):
             return "preset"
 
-    def _setSelectMode(self, mode):
+    @staticmethod
+    def _setSelectMode(mode):
         if mode == "object":
             cmds.selectMode(object=True)
         elif mode == "component":

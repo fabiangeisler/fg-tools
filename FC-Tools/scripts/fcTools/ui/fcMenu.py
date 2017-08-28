@@ -1,10 +1,10 @@
-'''
+"""
 This module Contains the Main class for creating the Menu of the fcTools.
-'''
+"""
 import pymel.core as pm
 
 
-class FcMenu():
+class FcMenu(object):
 
     def __init__(self):
 

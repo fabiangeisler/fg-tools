@@ -1,7 +1,7 @@
-'''
+"""
 This module contains functions for making playblasts and screenshots from
 modelpanels in Maya. Because of this GUI dependency this should not be loaded in batch mode.
-'''
+"""
 import os
 import datetime
 
@@ -10,14 +10,14 @@ import maya.cmds as cmds
 
 
 class CaptureThumbnail(object):
-    '''
+    """
     This class can capture thumbnails from the Viewport and save them as MetaData for the current Maya scene.
     After that you can view the screenshot in the Content Browser.
 
     Usage::
 
         CaptureThumbnail()
-    '''
+    """
 
     def __init__(self):
         cmds.thumbnailCaptureComponent(capture=True,  # @UndefinedVariable
@@ -30,11 +30,11 @@ class CaptureThumbnail(object):
 
 
 def getModelPanel():
-    '''
+    """
     This function will get (or otherwise guess) the currently active model-panel!
     :return: the panel or an empty string if no panel is visible
     :rtype: str
-    '''
+    """
     mod_pan = cmds.getPanel(type='modelPanel') or []
     foc_pan = cmds.getPanel(withFocus=True) or []
     vis_pan = cmds.getPanel(visiblePanels=True) or []
@@ -61,13 +61,13 @@ def getModelPanel():
 
 
 def makePlayblast(mode='desktop'):
-    '''
+    """
     make a playblast from the current model panel
 
     :param mode: 'dialog': Save with Dialog
                  'project': Save to Project Directory
                  'desktop': Save to Desktop
-    '''
+    """
 
     p = getModelPanel()
     cam = cmds.modelEditor(p, query=True, camera=True)
@@ -129,10 +129,10 @@ def makePlayblast(mode='desktop'):
 
 
 def createViewportSnapshot(imageFile):
-    '''
+    """
     creates a snapshot from the current Viewport and saves it to the specified path
     :param str imageFile: the full path for the image file.
-    '''
+    """
     imageDir = os.path.dirname(imageFile)
     if not os.path.exists(imageDir):
         os.makedirs(imageDir)

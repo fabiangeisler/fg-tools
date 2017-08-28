@@ -1,16 +1,16 @@
-'''
+"""
 Functions for debugging purposes.
-'''
+"""
 import sys
 
 
 def reloadPyModules(scriptPath):
-    '''
+    """
     This reloads all currently loaded python modules that are located inside the given scriptPath.
     This is mainly meant to be a developer tool so no "reload()" functions have to be placed in the actual code.
 
     :param str scriptPath: The full path to the script directory.
-    '''
+    """
     scriptPath = scriptPath.replace("\\", "/")
 
     reloadModules = {}

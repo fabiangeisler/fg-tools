@@ -1,6 +1,6 @@
-'''
+"""
 Functions for file system manipulation.
-'''
+"""
 import os
 import subprocess
 import maya.cmds as cmds
@@ -8,13 +8,13 @@ import re
 
 
 def findWorkspace(filePath):
-    '''
+    """
     takes the given file path and walks up the structure and tries to find the workspace.mel.
     and returns it when it finds it.
 
     :param str filePath:
     :rtype: str
-    '''
+    """
     dirname = os.path.dirname(filePath)
     while not os.path.exists(dirname + '/workspace.mel'):
         newDirname = os.path.dirname(dirname)
@@ -26,10 +26,10 @@ def findWorkspace(filePath):
 
 
 def openExplorer(path):
-    '''
+    """
     opens the windows explorer with the given file selected.
     :param str path:
-    '''
+    """
     if os.path.isfile(path):
         subprocess.Popen(r'Explorer /select,{0:s}'.format(path.replace('/', '\\')))
     else:
@@ -37,18 +37,18 @@ def openExplorer(path):
 
 
 def getRenderFolder():
-    '''
+    """
     :returns: the current folder where images will be rendered.
     :rtype: str
-    '''
+    """
     return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='images')) + '/'
 
 
 def getSourceimagesFolder():
-    '''
+    """
     :returns: the current textures folder.
     :rtype: str
-    '''
+    """
     return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='sourceImages')) + '/'
 
 

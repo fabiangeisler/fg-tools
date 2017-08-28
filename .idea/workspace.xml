@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0c48f4c0-ceb7-446e-aefa-99eabcc064ac" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.pydevproject" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config/Run_UnitTests_FC-Tools.launch" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/AverageSelectionX.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/AverageSelectionY.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/AverageSelectionZ.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/IconMaster.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/Spherify_Icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/aligntoworld.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/centerpivot.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/centerpivotworld.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/copyPivot.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/deletethings.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/freezetrans.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/lambertshd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/pastePivot.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/select3face.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/select4plusface.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icons/togglexray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugins/commandPlugins/fcAverageComponentsCmd.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/plugins/fcToolCommands.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcDebug.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/components.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/fileSystem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/mathExtended.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/mayaRuntimeCommand.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/modeling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/pivot.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/ui/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/ui/fcMenu.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/ui/playblast.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/scripts/fcTools/util.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/commandPlugins/__init__.py" afterPath="$PROJECT_DIR$/fcTools.mod" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="fcTools.mod" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fcTools.mod">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+              <folding>
+                <element signature="e#64#73#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fcAverageComponentsCmd.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/plug-ins/commandPlugins/fcAverageComponentsCmd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="17" lean-forward="true" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+              <folding>
+                <element signature="e#10#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mayaRuntimeCommand.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/mayaRuntimeCommand.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mathExtended.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/mathExtended.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="components.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/components.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="663">
+              <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fcToolCommands.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/plug-ins/fcToolCommands.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fcMenu.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/fcMenu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1756">
+              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="502">
+              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/fcTools.mod" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/mayaRuntimeCommand.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/fcMenu.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/util.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/__init__.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/mathExtended.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/components.py" />
+        <option value="$PROJECT_DIR$/FC-Tools/scripts/fcTools/__init__.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1216" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+              <item name="plug-ins" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+              <item name="plug-ins" type="462c0819:PsiDirectoryNode" />
+              <item name="commandPlugins" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="fcTools" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fczichelski.fcTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fczichelski.fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="FC-Tools" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="fcTools" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="C:/Program Files/Autodesk/Maya2017/bin/mayapy.exe" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Z:\code\source\fczichelski.fcTools\FC-Tools" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c48f4c0-ceb7-446e-aefa-99eabcc064ac" name="Default" comment="" />
+      <created>1503904801674</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1503904801674</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1928" y="-8" width="1936" height="1216" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32971016" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/mayaRuntimeCommand.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/mathExtended.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="36" column="17" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/components.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="55" column="19" lean-forward="false" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fcTools.mod">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="49" column="29" lean-forward="true" selection-start-line="49" selection-start-column="29" selection-end-line="49" selection-end-column="29" />
+          <folding>
+            <element signature="e#64#73#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/plug-ins/commandPlugins/fcAverageComponentsCmd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="17" lean-forward="true" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+          <folding>
+            <element signature="e#10#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/plug-ins/fcToolCommands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FC-Tools/scripts/fcTools/ui/fcMenu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1756">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

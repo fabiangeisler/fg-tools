@@ -1,6 +1,6 @@
-'''
+"""
 Functions for controlling pivots on objects.
-'''
+"""
 import maya.cmds as cmds
 import components as com
 
@@ -10,9 +10,9 @@ gSCALEPIVOT = [0.0, 0.0, 0.0]
 
 
 def pivotToComponents(components):
-    '''
+    """
     puts the Pivot to the current component selection
-    '''
+    """
     vertices = com.convertToVertices(components)
     shape = vertices[0].split('.')[0]
     transform = cmds.listRelatives(shape, parent=True)[0]
