@@ -3,7 +3,7 @@
 """
 
 import maya.api.OpenMaya as om
-import fcTools.modeling as mdl
+import fc_tools.modeling as mdl
 
 maya_useNewAPI = True
 
@@ -47,7 +47,7 @@ class FcAverageComponentsCmd(om.MPxCommand):
         else:
             axis = 'x'
 
-        mdl.moveComponentsToAxis(selList.getSelectionStrings(), axis=axis)
+        mdl.move_components_to_axis(selList.getSelectionStrings(), axis=axis)
 
 
 def initializePlugin(plugin):

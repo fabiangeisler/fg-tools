@@ -15,8 +15,8 @@ You can assign hot-keys to them if you want to.
   if fcToolPath not in sys.path:
       sys.path.append(fcToolPath)
 
-  import fcTools
-  fcTools.createMenu()
+  import fc_tools
+  fc_tools.createMenu()
   ```
 * Thats's it! :)
 

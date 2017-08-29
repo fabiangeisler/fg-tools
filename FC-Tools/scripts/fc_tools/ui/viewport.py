@@ -21,15 +21,15 @@ class CaptureThumbnail(object):
 
     def __init__(self):
         cmds.thumbnailCaptureComponent(capture=True,
-                                       fileDialogCallback=('python("import fcTools.ui.playblast as pb;'
-                                                           'pb.CaptureThumbnail.saveCapture()")'))
+                                       fileDialogCallback=('python("import fc_tools.ui.viewport as viewport;'
+                                                           'viewport.CaptureThumbnail.save_capture()")'))
 
     @staticmethod
-    def saveCapture():
+    def save_capture():
         cmds.thumbnailCaptureComponent(save=cmds.file(query=True, sceneName=True))
 
 
-def getModelPanel():
+def get_model_panel():
     """
     This function will get (or otherwise guess) the currently active model-panel!
     :return: the panel or an empty string if no panel is visible
@@ -60,7 +60,7 @@ def getModelPanel():
             return vis_mod_pan[0]
 
 
-def makePlayblast(mode='desktop'):
+def create_playblast(mode='desktop'):
     """
     make a playblast from the current model panel
 
@@ -69,7 +69,7 @@ def makePlayblast(mode='desktop'):
                  'desktop': Save to Desktop
     """
 
-    p = getModelPanel()
+    p = get_model_panel()
     cam = cmds.modelEditor(p, query=True, camera=True)
     currFileName = cmds.file(query=True, sn=True, shn=True)
     niceFileName = ('{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'
@@ -155,40 +155,40 @@ def saveRenderViewImage(imageFile):
     cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
 
 
-def toggleSmoothShaded(mdlEditor):
-    if wireframeIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=True)
-        setSmoothShaded(mdlEditor)
-    elif wireframeOnShadedIsActive(mdlEditor):
-        setWireframe(mdlEditor)
+def toggle_smooth_shaded(model_editor):
+    if wireframeIsActive(model_editor):
+        setWireframeOnShaded(model_editor, value=True)
+        setSmoothShaded(model_editor)
+    elif wireframeOnShadedIsActive(model_editor):
+        set_wireframe(model_editor)
 
 
-def toggleWireframe(mdlEditor):
-    if smoothShadedIsActive(mdlEditor) and wireframeOnShadedIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=False)
-    elif smoothShadedIsActive(mdlEditor) and not wireframeOnShadedIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=True)
+def toggle_wireframe(model_editor):
+    if smoothShadedIsActive(model_editor) and wireframeOnShadedIsActive(model_editor):
+        setWireframeOnShaded(model_editor, value=False)
+    elif smoothShadedIsActive(model_editor) and not wireframeOnShadedIsActive(model_editor):
+        setWireframeOnShaded(model_editor, value=True)
 
 
-def setWireframe(mdlEditor):
-    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='wireframe')
+def set_wireframe(model_editor):
+    cmds.modelEditor(model_editor, edit=True, displayAppearance='wireframe')
 
 
-def setSmoothShaded(mdlEditor):
-    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='smoothShaded')
+def setSmoothShaded(model_editor):
+    cmds.modelEditor(model_editor, edit=True, displayAppearance='smoothShaded')
 
 
-def setWireframeOnShaded(mdlEditor, value=True):
-    cmds.modelEditor(mdlEditor, edit=True, wireframeOnShaded=value)
+def setWireframeOnShaded(model_editor, value=True):
+    cmds.modelEditor(model_editor, edit=True, wireframeOnShaded=value)
 
 
-def wireframeIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'wireframe'
+def wireframeIsActive(model_editor):
+    return cmds.modelEditor(model_editor, query=True, displayAppearance=True) == 'wireframe'
 
 
-def smoothShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'smoothShaded'
+def smoothShadedIsActive(model_editor):
+    return cmds.modelEditor(model_editor, query=True, displayAppearance=True) == 'smoothShaded'
 
 
-def wireframeOnShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, wireframeOnShaded=True)
+def wireframeOnShadedIsActive(model_editor):
+    return cmds.modelEditor(model_editor, query=True, wireframeOnShaded=True)

@@ -7,28 +7,29 @@ import maya.cmds as cmds
 import re
 
 
-def findWorkspace(filePath):
+def get_workspace(file_path):
     """
     takes the given file path and walks up the structure and tries to find the workspace.mel.
     and returns it when it finds it.
 
-    :param str filePath:
+    :param str file_path:
     :rtype: str
     """
-    dirname = os.path.dirname(filePath)
-    while not os.path.exists(dirname + '/workspace.mel'):
-        newDirname = os.path.dirname(dirname)
-        if newDirname == dirname:
+    parent_folder = os.path.dirname(file_path)
+    while not os.path.exists(parent_folder + '/workspace.mel'):
+        next_folder = os.path.dirname(parent_folder)
+        if next_folder == parent_folder:
             raise OSError('Could not find workspace.mel')
         else:
-            dirname = newDirname
-    return dirname
+            parent_folder = next_folder
+    return parent_folder
 
 
-def openExplorer(path):
+def open_explorer(path):
     """
     opens the windows explorer with the given file selected.
-    :param str path:
+
+    :param str path: File or folder path to open.
     """
     if os.path.isfile(path):
         subprocess.Popen(r'Explorer /select,{0:s}'.format(path.replace('/', '\\')))
@@ -36,7 +37,7 @@ def openExplorer(path):
         os.startfile(path)
 
 
-def getRenderFolder():
+def get_render_folder():
     """
     :returns: the current folder where images will be rendered.
     :rtype: str
@@ -44,7 +45,7 @@ def getRenderFolder():
     return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='images')) + '/'
 
 
-def getSourceimagesFolder():
+def get_sourceimages_folder():
     """
     :returns: the current textures folder.
     :rtype: str
@@ -52,7 +53,7 @@ def getSourceimagesFolder():
     return cmds.workspace(expandName=cmds.workspace(fileRuleEntry='sourceImages')) + '/'
 
 
-def getDesktopFolder():
+def get_desktop_folder():
     return os.path.expanduser('~').replace('Documents', 'Desktop') + '/'
 
 
@@ -73,10 +74,10 @@ def incremental_save():
         cmds.file(rename=increment_filename)
 
         if curr_filename.endswith('mb'):
-            filetype = 'mayaBinary'
+            file_type = 'mayaBinary'
         else:
-            filetype = 'mayaAscii'
-        cmds.file(save=True, type=filetype)
+            file_type = 'mayaAscii'
+        cmds.file(save=True, type=file_type)
         print 'File saved: ' + increment_filename,
     else:
         cmds.warning('Filename has no Numbers in it!')

@@ -1,5 +1,5 @@
 """
-This module Contains the Main class for creating the Menu of the fcTools.
+This module Contains the Main class for creating the Menu of the fc_tools.
 """
 import pymel.core as pm
 
@@ -8,13 +8,14 @@ class FcMenu(object):
 
     def __init__(self):
 
-        fcMenuName = 'fcMenu'
-        if pm.menu(fcMenuName, query=True, exists=True):
-            pm.deleteUI(fcMenuName, menu=True)
+        fc_menu_name = 'fcMenu'
+        if pm.menu(fc_menu_name, query=True, exists=True):
+            pm.deleteUI(fc_menu_name, menu=True)
 
-        with pm.menu(fcMenuName, tearOff=True, parent=pm.MelGlobals()['gMainWindow'], label='FC Tools'):
+        with pm.menu(fc_menu_name, tearOff=True, parent=pm.MelGlobals()['gMainWindow'], label='FC Tools'):
             pm.menuItem(dividerLabel='File', divider=True)
-            pm.menuItem(label='Smart Open',  # image='fileOpen.png',
+            pm.menuItem(label='Smart Open',
+                        image='fileOpen.png',
                         sourceType='mel',
                         command=('int $mods = `getModifiers`;\n'
                                  'if ($mods % 2) { // Shift\n'
@@ -23,8 +24,7 @@ class FcMenu(object):
                                  '    fcSmartOpen;\n'
                                  '}'),
                         annotation=('Open File and set Project if possible.\n'
-                                    'Shift: Reload the current Scene.'),
-                        imageOverlayLabel='Open')
+                                    'Shift: Reload the current Scene.'))
             pm.menuItem(label='Save Incremental',
                         sourceType='mel',
                         command='fcSaveIncremental;',
@@ -51,12 +51,12 @@ class FcMenu(object):
             pm.menuItem(dividerLabel='Select', divider=True)
             pm.menuItem(label='Select Triangles',
                         command='fcSelectTriangles;',
-                        imageOverlayLabel='Tris',
+                        image='fg_triangles.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Select Triangles from all polygon objects you selected.')
             pm.menuItem(label='Select N-Gons',
-                        imageOverlayLabel='N-Gons',
+                        image='fg_ngons.png',
                         command='fcSelectNGons;',
                         sourceType='mel',
                         echoCommand=True,
@@ -89,37 +89,37 @@ class FcMenu(object):
             pm.menuItem(dividerLabel='Modeling', divider=True)
             pm.menuItem(label='Spherify',
                         command='fcSpherify;',
-                        imageOverlayLabel='spherify',
+                        image='fg_spherify.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Move all selected components to equal distance.')
             pm.menuItem(label='Move Components to X-Axis',
                         command='fcAverageComponents -axis "x";',
-                        imageOverlayLabel='mcX',
+                        image='fg_average_selection_x.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Move all selected components so they are aligned on the x-axis.')
             pm.menuItem(label='Move Components to Y-Axis',
                         command='fcAverageComponents -axis "y";',
-                        imageOverlayLabel='mcY',
+                        image='fg_average_selection_y.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Move all selected components so they are aligned on the y-axis.')
             pm.menuItem(label='Move Components to Z-Axis',
                         command='fcAverageComponents -axis "z";',
-                        imageOverlayLabel='mcZ',
+                        image='fg_average_selection_z.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Move all selected components so they are aligned on the z-axis.')
             pm.menuItem(label='Assign Default Shader',
                         command='fcAssignDefaultShaderToSelection;',
-                        imageOverlayLabel='lam1',
+                        image='fg_lambert1.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Assign the Default Shader "lambert1" to all selected objects.')
             pm.menuItem(label='Toggle X-Ray',
                         command='fcToggleXrayDisplayOfSelection;',
-                        imageOverlayLabel='XRay',
+                        image='fg_x_ray.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Toggle X-Ray display in the viewport on all selected objects.')
@@ -127,19 +127,19 @@ class FcMenu(object):
             pm.menuItem(dividerLabel='Pivots', divider=True)
             pm.menuItem(label='Copy Pivot',
                         command='fcCopyPivot;',
-                        imageOverlayLabel='copyP',
+                        image='fg_copy_pivot.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Copies the pivot of the selected object.')
             pm.menuItem(label='Paste Pivot',
                         command='fcPastePivot;',
-                        imageOverlayLabel='pasteP',
+                        image='fg_paste_pivot.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Pastes the pivot to all selected objects.')
             pm.menuItem(label='Pivots to WorldCenter',
                         command='fcPivotsToWorldCenter;',
-                        imageOverlayLabel='worldP',
+                        image='fg_center_pivot_world.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Moves the pivots of all selected objects to the world-center.')

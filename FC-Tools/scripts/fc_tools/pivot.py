@@ -15,11 +15,11 @@ def move_pivot_to_components(components):
 
     :param list[str] components: A list of components.
     """
-    vertices = com.convertToVertices(components)
+    vertices = com.convert_to_vertices(components)
     shape = vertices[0].split('.')[0]
     transform = cmds.listRelatives(shape, parent=True)[0]
 
-    mid_x, mid_y, mid_z = com.getMidpoint(vertices)
+    mid_x, mid_y, mid_z = com.get_midpoint(vertices)
 
     cmds.move(mid_x, mid_y, mid_z, transform + '.scalePivot')
     cmds.move(mid_x, mid_y, mid_z, transform + '.rotatePivot')

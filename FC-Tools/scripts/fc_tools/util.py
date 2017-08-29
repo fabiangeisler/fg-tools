@@ -4,31 +4,6 @@ little utility functions for this and that.
 import maya.cmds as cmds
 
 
-def removePlugin(pluginName):
-    """
-    This tries to unload the given plugin from maya by deleting all its registered nodes first
-    and the unload the plugin. There is still no guarantee that this will work.
-
-    :param str pluginName: The name of the plugin
-    """
-    if cmds.pluginInfo(pluginName, q=True, loaded=True):
-        cmds.pluginInfo(pluginName, e=True, autoload=False)
-
-        nodeTypes = cmds.pluginInfo(pluginName, query=True, dependNode=True)
-
-        for nodetype in nodeTypes:
-            nodes = cmds.ls(type=nodetype)
-            for node in nodes:
-                cmds.lockNode(node, lock=False)
-                print node
-                cmds.delete(node)
-        cmds.flushUndo()
-        try:
-            cmds.unloadPlugin(pluginName)
-        except Exception as err:
-            print err
-
-
 def getUpstreamNodes(node):
     """
     :param str node:
