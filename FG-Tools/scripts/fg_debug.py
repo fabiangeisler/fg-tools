@@ -2,6 +2,10 @@
 Functions for debugging purposes.
 """
 import sys
+from pprint import pprint
+
+import maya.cmds as cmds
+import os
 
 
 def reload_python_modules(script_path):
@@ -36,3 +40,31 @@ def reload_python_modules(script_path):
             print "ERROR:" + str(error)
         print "{0:3.0f}% loaded: reloading {1:s}".format(percent * i, modName)
     print "Reloaded {0:d} Modules.\n".format(len(reload_modules)),
+
+
+def maya_module_info():
+    """
+    Prints out information about the currently loaded Maya modules.
+    """
+    mods = {}
+    for mod in cmds.moduleInfo(listModules=True):
+
+        beauty_environ = {}
+        for key, value in dict(os.environ).iteritems():
+            if ';' in value:
+                value = value.split(';')
+            paths = [path for path in value if path.startswith(cmds.moduleInfo(path=True, moduleName=mod))]
+            if paths:
+                beauty_environ[key] = paths
+
+        file_content = []
+        with open(cmds.moduleInfo(definition=True, moduleName=mod), 'r') as f:
+            for line in f:
+                file_content.append(line.replace('\r\n', ''))
+
+        mods[mod] = {"modFile": cmds.moduleInfo(definition=True, moduleName=mod),
+                     "modFileContent": file_content,
+                     "path": cmds.moduleInfo(path=True, moduleName=mod),
+                     "version": cmds.moduleInfo(version=True, moduleName=mod),
+                     "environment": beauty_environ}
+    pprint(mods)

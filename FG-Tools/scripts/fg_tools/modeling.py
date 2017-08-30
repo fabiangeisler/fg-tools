@@ -2,7 +2,7 @@
 This module collects functions that are handy for modeling.
 """
 import maya.cmds as cmds
-import components as com
+import component as com
 
 
 def move_components_to_axis(components, axis='x'):

@@ -3,46 +3,52 @@
 
 import maya.cmds as cmds
 
-import fc_tools.maya_runtime_command as mrc
-import fc_tools.file_system as fs
+import fg_tools.maya_runtime_command
+import fg_tools.file_system as fs
 import viewport
 import datetime
 
-__fc_toolsUIInitialized = False
+__fg_toolsUIInitialized = False
 
 
 def initialize():
     """
-    Initializes the fc_tools either from mayapy or regular maya.
+    Initializes the fg_tools either from mayapy or regular maya.
     """
-    global __fc_toolsUIInitialized
+    global __fg_toolsUIInitialized
 
     if cmds.about(batch=True):
-        raise RuntimeError('The menu for FC Tools can not be created in batch-mode.')
+        raise RuntimeError('The menu for fg Tools can not be created in batch-mode.')
     else:
         initializeRuntimeCommands()
 
-        __fc_toolsUIInitialized = True
+        __fg_toolsUIInitialized = True
 
 
 def initializeRuntimeCommands():
     """
     creates all runtimeCommands
     """
-    mainCategory = 'FC-Tools'
+    mainCategory = 'fg-Tools'
 
     category = mainCategory + '.Display'
-    mrc.create_runtime_command(command_name='fcToggleSmoothShaded',
-                               annotation='Toggles smooth shading in the current viewport.',
-                               command=('import fc_tools.ui\n'
-                                        'fc_tools.ui.toggle_smooth_shaded()'),
-                               category=category)
+    fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleSmoothShaded',
+                                                         annotation='Toggles smooth shading in the current viewport.',
+                                                         command=('import fg_tools.ui\n'
+                                                                  'fg_tools.ui.toggle_smooth_shaded()'),
+                                                         category=category)
 
-    mrc.create_runtime_command(command_name='fcToggleWireframe',
-                               annotation='Toggles wireframe in the current viewport.',
-                               command=('import fc_tools.ui\n'
-                                        'fc_tools.ui.toggleWireframe()'),
-                               category=category)
+    fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleWireframe',
+                                                         annotation='Toggles wireframe in the current viewport.',
+                                                         command=('import fg_tools.ui\n'
+                                                                  'fg_tools.ui.toggleWireframe()'),
+                                                         category=category)
+
+    fg_tools.maya_runtime_command.create_runtime_command(command_name='fgSaveSnapshot',
+                                                         annotation='create a snapshot of the viewport and save it in the render folder.',
+                                                         command=('import fg_tools.ui\n'
+                                                                  'fg_tools.ui.saveSnapshot()'),
+                                                         category=category)
 
 
 def saveSnapshot(mode='project'):
@@ -77,7 +83,7 @@ def saveSnapshot(mode='project'):
         else:
             return
     print image_file
-    viewport.createViewportSnapshot(image_file)
+    viewport.create_viewport_snapshot(image_file)
 
 
 def toggle_smooth_shaded():
@@ -92,5 +98,5 @@ def toggleWireframe():
         viewport.toggle_wireframe(model_editor)
 
 
-if not __fc_toolsUIInitialized:
+if not __fg_toolsUIInitialized:
     initialize()

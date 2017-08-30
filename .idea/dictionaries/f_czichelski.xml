@@ -2,14 +2,19 @@
   <dictionary name="f.czichelski">
     <words>
       <w>cmds</w>
+      <w>czichelski</w>
       <w>gons</w>
       <w>mayapy</w>
+      <w>modelpanels</w>
       <w>ngons</w>
       <w>persp</w>
       <w>playblast</w>
+      <w>playblasts</w>
+      <w>screenshot</w>
       <w>sourceimages</w>
       <w>spherify</w>
       <w>uninitialize</w>
+      <w>wireframe</w>
     </words>
   </dictionary>
 </component>

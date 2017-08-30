@@ -2,7 +2,7 @@
 Functions for controlling pivots on objects.
 """
 import maya.cmds as cmds
-import components as com
+import component as com
 
 
 ROTATE_PIVOT = [0.0, 0.0, 0.0]
@@ -33,6 +33,24 @@ def move_pivot_to_world_center(obj):
     """
     cmds.move(0, 0, 0, obj + '.scalePivot')
     cmds.move(0, 0, 0, obj + '.rotatePivot')
+
+
+def pivot_to_bottom(objects):
+    """
+    Centers the pivot of the given objects to their bounding box. Except for the y-axis which will be on the bottom
+    of the bounding box.
+
+    :param list[str] objects:
+    """
+    x_min, y_min, z_min, x_max, y_max, z_max = cmds.exactWorldBoundingBox(objects)
+
+    x = (x_max - x_min) * 0.5 + x_min
+    y = y_min
+    z = (z_max - z_min) * 0.5 + z_min
+
+    for obj in objects:
+        cmds.move(x, y, z, obj + '.scalePivot')
+        cmds.move(x, y, z, obj + '.rotatePivot')
 
 
 def copy_pivot(obj):
