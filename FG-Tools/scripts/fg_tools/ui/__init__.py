@@ -44,13 +44,13 @@ def initialize_runtime_commands():
 
     category = main_category + '.Display'
     fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleSmoothShaded',
-                                                         annotation='Toggles smooth shading in the current viewport.',
+                                                         annotation=toggle_smooth_shaded.__doc__,
                                                          command=('import fg_tools.ui\n'
                                                                   'fg_tools.ui.toggle_smooth_shaded()'),
                                                          category=category)
 
     fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleWireframe',
-                                                         annotation='Toggles wireframe in the current viewport.',
+                                                         annotation=toggle_wireframe.__doc__,
                                                          command=('import fg_tools.ui\n'
                                                                   'fg_tools.ui.toggle_wireframe()'),
                                                          category=category)
@@ -99,12 +99,18 @@ def save_snapshot(mode='project'):
 
 
 def toggle_smooth_shaded():
+    """
+    Toggles smooth shading in the current viewport.
+    """
     model_editor = viewport.get_model_panel()
     if model_editor:
         viewport.toggle_smooth_shaded(model_editor)
 
 
 def toggle_wireframe():
+    """
+    Toggles wireframe in the current viewport.
+    """
     model_editor = viewport.get_model_panel()
     if model_editor:
         viewport.toggle_wireframe(model_editor)

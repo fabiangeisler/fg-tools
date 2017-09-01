@@ -39,83 +39,81 @@ def initialize_runtime_commands():
     main_category = 'FG-Tools'
     category = main_category + '.File'
     maya_runtime_command.create_runtime_command(command_name='fgSmartOpen',
-                                                annotation='Open a maya file and tries to find and set the '
-                                                           'appropriate project.',
+                                                annotation=smart_open.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.smart_open()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgReloadScene',
-                                                annotation='Reload the currently open scene.',
+                                                annotation=reload_scene.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.reload_scene()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSaveIncremental',
-                                                annotation='save the current maya file under a new version',
+                                                annotation=save_incremental.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.save_incremental()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgOpenSceneFolder',
-                                                annotation='open the current folder from this maya scene',
+                                                annotation=open_scene_folder.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.open_scene_folder()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgOpenRenderFolder',
-                                                annotation='open the folder where images will be rendered to',
+                                                annotation=open_render_folder.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.open_render_folder()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgOpenTextureFolder',
-                                                annotation='open the texture folder',
+                                                annotation=open_texture_folder.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.open_texture_folder()'),
                                                 category=category)
 
     category = main_category + '.Selection'
     maya_runtime_command.create_runtime_command(command_name='fgSelectTriangles',
-                                                annotation='select all triangles based on your current selection',
+                                                annotation=select_triangles.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_triangles()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSelectNGons',
-                                                annotation='select all n-gons based on your current selection',
+                                                annotation=select_n_gons.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_n_gons()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSelectLaminaFaces',
-                                                annotation='select all lamina faces in your current selection',
+                                                annotation=select_lamina_faces.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_lamina_faces()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSelectNonManifoldVertices',
-                                                annotation='select all non-manifold vertices in your current selection',
+                                                annotation=select_non_manifold_vertices.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_non_manifold_vertices()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSelectUVSeams',
-                                                annotation='select all uv-seams in your current selection',
+                                                annotation=select_uv_seams.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_uv_seams()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgSelectHardEdges',
-                                                annotation='select all hard edges in your current selection',
+                                                annotation=select_hard_edges.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.select_hard_edges()'),
                                                 category=category)
 
     category = main_category + '.Modeling'
     maya_runtime_command.create_runtime_command(command_name='fgSpherify',
-                                                annotation='Move all selected components to equal distance to each '
-                                                           'other.',
+                                                annotation=spherify.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.spherify()'),
                                                 category=category)
@@ -142,55 +140,53 @@ def initialize_runtime_commands():
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgAssignDefaultShaderToSelection',
-                                                annotation='Assign the Default Shader "lambert1" to all selected '
-                                                           'objects.',
+                                                annotation=assign_default_shader_to_selection.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.assign_default_shader_to_selection()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgToggleXRayDisplayOfSelection',
-                                                annotation='Toggle X-Ray display in the viewport on all selected '
-                                                           'objects.',
+                                                annotation=toggle_x_ray_display_of_selection.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.toggle_x_ray_display_of_selection()'),
                                                 category=category)
 
     category = main_category + '.Pivots'
     maya_runtime_command.create_runtime_command(command_name='fgCopyPivot',
-                                                annotation='Copies the pivot of the selected object.',
+                                                annotation=copy_pivot.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.copy_pivot()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgPastePivot',
-                                                annotation='Pastes the pivot to all selected objects.',
+                                                annotation=paste_pivot.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.paste_pivot()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgPivotsToWorldCenter',
-                                                annotation='Moves the pivots of all selected objects to the '
-                                                           'world-center.',
+                                                annotation=pivots_to_world_center.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.pivots_to_world_center()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgPivotToSelection',
-                                                annotation='Moves the pivot to the middle of the selected components.',
+                                                annotation=pivot_to_component_selection.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.pivot_to_component_selection()'),
                                                 category=category)
 
     maya_runtime_command.create_runtime_command(command_name='fgPivotToBottom',
-                                                annotation='Moves the pivot to the center of the combined bounding '
-                                                           'box. Except the y-axis which will be at the bottom of the '
-                                                           'bounding box',
+                                                annotation=pivot_to_bottom.__doc__,
                                                 command=('import fg_tools\n'
                                                          'fg_tools.pivot_to_bottom()'),
                                                 category=category)
 
 
 def smart_open():
+    """
+    Open a maya file and tries to find and set the appropriate project.
+    """
     file_before = cmds.file(q=True, sn=True)
     cmds.OpenScene()
     file_after = cmds.file(q=True, sn=True)
@@ -205,6 +201,9 @@ def smart_open():
 
 
 def reload_scene():
+    """
+    Reload the currently open scene.
+    """
     maya_file = cmds.file(q=True, sn=True)
     if maya_file:
         if 'Yes' == cmds.confirmDialog(title='Reload Scene',
@@ -220,10 +219,16 @@ def reload_scene():
 
 
 def save_incremental():
+    """
+    Save the current maya file under a new version. The last number found in the current scene name will be raised by 1.
+    """
     file_system.incremental_save()
 
 
 def open_scene_folder():
+    """
+    Open the current folder from this maya scene.
+    """
     maya_file = cmds.file(q=True, sn=True)
     if maya_file:
         file_system.open_explorer(maya_file)
@@ -232,18 +237,27 @@ def open_scene_folder():
 
 
 def open_render_folder():
+    """
+    Open the folder where images will be rendered to.
+    """
     render_folder = file_system.get_render_folder()
     file_system.open_explorer(render_folder)
     print 'Opened Folder: ' + render_folder
 
 
 def open_texture_folder():
+    """
+    Open the texture folder.
+    """
     tex_folder = file_system.get_sourceimages_folder()
     file_system.open_explorer(tex_folder)
     print 'Opened Folder: ' + tex_folder
 
 
 def select_triangles():
+    """
+    Select all triangles of the currently selected objects.
+    """
     tris = component.get_triangles()
     if tris:
         objects = list(set([tri.split('.')[0] for tri in tris]))
@@ -258,6 +272,9 @@ def select_triangles():
 
 
 def select_n_gons():
+    """
+    Select all n-gons of the currently selected objects.
+    """
     ngons = component.get_ngons()
     if ngons:
         objects = list(set([ngon.split('.')[0] for ngon in ngons]))
@@ -272,6 +289,9 @@ def select_n_gons():
 
 
 def select_lamina_faces():
+    """
+    Select all lamina faces of the currently selected objects.
+    """
     lamina = component.get_lamina_faces()
     if lamina:
         objects = list(set([l.split('.')[0] for l in lamina]))
@@ -286,6 +306,9 @@ def select_lamina_faces():
 
 
 def select_non_manifold_vertices():
+    """
+    Select all non-manifold vertices of the currently selected objects.
+    """
     nmv = component.get_non_manifold_vertices()
     if nmv:
         objects = list(set([vertex.split('.')[0] for vertex in nmv]))
@@ -345,7 +368,7 @@ def select_hard_edges():
 
 def spherify():
     """
-    Puts selected components to average distance to their midpoint.
+    Move all selected components to equal distance of each other.
     """
     vertices = component.convert_to_vertices(cmds.ls(selection=True))
 
@@ -363,9 +386,9 @@ def spherify():
 
 def copy_pivot():
     """
-    Save the pivot the currently selected pivot to apply it later with "paste_pivot".
+    Save the pivot the currently selected object to apply it later with "paste pivot".
     """
-    sel = cmds.ls(selection=True, o=True)
+    sel = cmds.ls(selection=True, objectsOnly=True)
     pivot.copy_pivot(sel[0])
 
     print 'Saved Pivot from: ' + sel[0],
@@ -373,9 +396,9 @@ def copy_pivot():
 
 def paste_pivot():
     """
-    Paste the pivot information that previously has bin saved via "copy_pivot" onto all selected objects.
+    Paste the pivot information that previously has bin saved via "copy pivot" onto all selected objects.
     """
-    sel = cmds.ls(selection=True, o=True)
+    sel = cmds.ls(selection=True, objectsOnly=True)
     for obj in sel:
         pivot.paste_pivot(obj)
     cmds.selectMode(object=True)
@@ -387,7 +410,7 @@ def pivot_to_component_selection():
     """
     puts the pivot to the current component selection.
     """
-    sel = cmds.ls(selection=True, fl=True)
+    sel = cmds.ls(selection=True)
     pivot.move_pivot_to_components(sel)
     cmds.selectMode(object=True)
 
@@ -406,7 +429,7 @@ def pivot_to_bottom():
     Moves all pivots from the selected objects to the center of their bounding box, except the y-axis will be on the
     bottom of the bounding box.
     """
-    sel = cmds.ls(selection=True)
+    sel = cmds.ls(selection=True, objectsOnly=True)
     pivot.pivot_to_bottom(sel)
 
 
