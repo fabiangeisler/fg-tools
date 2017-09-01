@@ -1,11 +1,11 @@
 """
 Functions for debugging purposes.
 """
-import sys
+import os
 from pprint import pprint
+import sys
 
 import maya.cmds as cmds
-import os
 
 
 def reload_python_modules(script_path):
@@ -68,3 +68,18 @@ def maya_module_info():
                      "version": cmds.moduleInfo(version=True, moduleName=mod),
                      "environment": beauty_environ}
     pprint(mods)
+
+
+def maya_environment_info():
+    """
+    Prints easily readable information about the currently loaded environment in Maya.
+    """
+    beauty_environ = {}
+    for key, value in dict(os.environ).iteritems():
+        if ';' in value:
+            value = value.split(';')
+        beauty_environ[key] = value
+    print('{:*^100}'.format(' os.environ '))
+    pprint(beauty_environ, indent=4)
+    print('{:*^100}'.format(' sys.path '))
+    pprint(sys.path)

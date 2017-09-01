@@ -118,7 +118,7 @@ class FgMenu(object):
                         echoCommand=True,
                         annotation='Assign the Default Shader "lambert1" to all selected objects.')
             pm.menuItem(label='Toggle X-Ray',
-                        command='fgToggleXrayDisplayOfSelection;',
+                        command='fgToggleXRayDisplayOfSelection;',
                         image='fg_x_ray.png',
                         sourceType='mel',
                         echoCommand=True,

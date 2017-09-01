@@ -4,35 +4,35 @@ little utility functions for this and that.
 import maya.cmds as cmds
 
 
-def getUpstreamNodes(node):
+def get_upstream_nodes(node):
     """
     :param str node:
     :returns: all upstream nodes of the given node
     :rtype: list
     """
-    def getInputs(obj):
+    def get_inputs(obj):
         inputs = cmds.listConnections(obj, source=True, destination=False)
         if inputs is not None:
             return set(inputs)
         return set()
 
-    def getRecursiveInputs(obj, parentResults=None):
-        if parentResults is None:
-            parentResults = set()
-        results = getInputs(obj)
+    def get_recursive_inputs(obj, parent_results=None):
+        if parent_results is None:
+            parent_results = set()
+        results = get_inputs(obj)
         if results:
             results.add(obj)
-            relevantResults = results - parentResults
-            for inputNode in relevantResults:
-                results = results.union(getRecursiveInputs(inputNode, results))
+            relevant_results = results - parent_results
+            for inputNode in relevant_results:
+                results = results.union(get_recursive_inputs(inputNode, results))
         return results
 
-    resultNodes = getRecursiveInputs(node)
-    resultNodes.discard(node)
-    return list(resultNodes)
+    result_nodes = get_recursive_inputs(node)
+    result_nodes.discard(node)
+    return list(result_nodes)
 
 
-def attrChangedBetween(attr, start, end):
+def attr_changed_between(attr, start, end):
     """
     Takes the given attribute and checks if it changes between
     the given time range. This is helpful to check whether an object is animated regardless if its parented, constrained
@@ -67,7 +67,7 @@ class UserSelection(object):
     """
 
     @staticmethod
-    def _getSelectMode():
+    def _get_select_mode():
         if cmds.selectMode(q=True, object=True):
             return "object"
         elif cmds.selectMode(q=True, component=True):
@@ -84,7 +84,7 @@ class UserSelection(object):
             return "preset"
 
     @staticmethod
-    def _setSelectMode(mode):
+    def _set_select_mode(mode):
         if mode == "object":
             cmds.selectMode(object=True)
         elif mode == "component":
@@ -105,16 +105,16 @@ class UserSelection(object):
         self._selectMode = ""
 
     def __enter__(self):
-        self._selectMode = self._getSelectMode()
+        self._selectMode = self._get_select_mode()
         self._userSelection = cmds.ls(selection=True, long=True)
         return self._userSelection
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._setSelectMode(self._selectMode)
+        self._set_select_mode(self._selectMode)
         cmds.select(clear=True)
         # since the user could have changed some names in the code block of the with statement we will check
         # whether every stored item exist before selecting it again.
-        exSel = [obj for obj in self._userSelection if cmds.objExists(obj)]
-        if exSel:
-            cmds.select(exSel)
+        ex_sel = [obj for obj in self._userSelection if cmds.objExists(obj)]
+        if ex_sel:
+            cmds.select(ex_sel)
         return False

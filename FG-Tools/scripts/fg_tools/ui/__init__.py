@@ -1,37 +1,48 @@
 """
 """
+import datetime
 
 import maya.cmds as cmds
 
 import fg_tools.maya_runtime_command
 import fg_tools.file_system as fs
 import viewport
-import datetime
+import fg_menu
 
 __fg_toolsUIInitialized = False
 
 
-def initialize():
+def __initialize():
     """
-    Initializes the fg_tools either from mayapy or regular maya.
+    Initializes the parts of the FG-Tools that have dependencies to the Maya GUI.
     """
     global __fg_toolsUIInitialized
 
-    if cmds.about(batch=True):
-        raise RuntimeError('The menu for fg Tools can not be created in batch-mode.')
+    if not __fg_toolsUIInitialized:
+        if cmds.about(batch=True):
+            raise RuntimeError('The UI parts of the FG-Tools can not be created in batch-mode.')
+        else:
+            initialize_runtime_commands()
+
+            __fg_toolsUIInitialized = True
     else:
-        initializeRuntimeCommands()
-
-        __fg_toolsUIInitialized = True
+        cmds.warning('The UI parts of the FG-Tools are already initialized.')
 
 
-def initializeRuntimeCommands():
+def create_menu():
     """
-    creates all runtimeCommands
+    Creates the Menu to access the FG-Tools.
     """
-    mainCategory = 'fg-Tools'
+    fg_menu.FgMenu()
 
-    category = mainCategory + '.Display'
+
+def initialize_runtime_commands():
+    """
+    Creates all runtimeCommands that are depended to the Maya GUI.
+    """
+    main_category = 'FG-Tools'
+
+    category = main_category + '.Display'
     fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleSmoothShaded',
                                                          annotation='Toggles smooth shading in the current viewport.',
                                                          command=('import fg_tools.ui\n'
@@ -41,17 +52,18 @@ def initializeRuntimeCommands():
     fg_tools.maya_runtime_command.create_runtime_command(command_name='fgToggleWireframe',
                                                          annotation='Toggles wireframe in the current viewport.',
                                                          command=('import fg_tools.ui\n'
-                                                                  'fg_tools.ui.toggleWireframe()'),
+                                                                  'fg_tools.ui.toggle_wireframe()'),
                                                          category=category)
 
     fg_tools.maya_runtime_command.create_runtime_command(command_name='fgSaveSnapshot',
-                                                         annotation='create a snapshot of the viewport and save it in the render folder.',
+                                                         annotation='Create a snapshot of the viewport and save it in '
+                                                                    'the render folder.',
                                                          command=('import fg_tools.ui\n'
-                                                                  'fg_tools.ui.saveSnapshot()'),
+                                                                  'fg_tools.ui.save_snapshot()'),
                                                          category=category)
 
 
-def saveSnapshot(mode='project'):
+def save_snapshot(mode='project'):
     """
     save a snapshot from the current model panel.
 
@@ -72,7 +84,7 @@ def saveSnapshot(mode='project'):
         images_folder = fs.get_render_folder()
         image_file = images_folder + nice_file_name + '.jpg'
     elif mode == 'dialog':
-        image_file = cmds.fileDialog2(cap='Save Screengrab',
+        image_file = cmds.fileDialog2(cap='Save Screenshot',
                                       fileFilter='JPEG (*.jpg);;TIFF (*.tif)',
                                       startingDirectory=image_file,
                                       fileMode=0,
@@ -92,11 +104,11 @@ def toggle_smooth_shaded():
         viewport.toggle_smooth_shaded(model_editor)
 
 
-def toggleWireframe():
+def toggle_wireframe():
     model_editor = viewport.get_model_panel()
     if model_editor:
         viewport.toggle_wireframe(model_editor)
 
 
 if not __fg_toolsUIInitialized:
-    initialize()
+    __initialize()

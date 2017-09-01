@@ -14,36 +14,27 @@ import pivot
 __fg_toolsInitialized = False
 
 
-def initialize():
+def __initialize():
     """
-    Initializes the fg_tools either from mayapy or regular maya.
+    Initializes the fg_tools either from mayapy or regular maya. This will be called automatically once you import this
+    package. It will __initialize all runtime commands that are accessible in "normal"- and in "batch"-mode.
     """
     global __fg_toolsInitialized
 
-    cmds.loadPlugin('fg_tools_commands.py')
+    if not __fg_toolsInitialized:
 
-    initialize_runtime_commands()
+        cmds.loadPlugin('fg_tools_commands.py')
 
-    __fg_toolsInitialized = True
+        initialize_runtime_commands()
 
-
-def create_menu():
-    """
-    Creates the Menu to access the fg-Tools from the GUI.
-
-    :raises:
-        :RuntimeError: When you call this in batch mode.
-    """
-    if cmds.about(batch=True):
-        raise RuntimeError('The menu for FG-Tools can not be created in batch-mode.')
+        __fg_toolsInitialized = True
     else:
-        import ui.fg_menu as fm
-        fm.FgMenu()
+        cmds.warning('FG-Tools are already initialized')
 
 
 def initialize_runtime_commands():
     """
-    creates all runtimeCommands
+    Creates all runtimeCommands that are accessible in "normal"- and in "batch"-mode.
     """
     main_category = 'FG-Tools'
     category = main_category + '.File'
@@ -157,7 +148,7 @@ def initialize_runtime_commands():
                                                          'fg_tools.assign_default_shader_to_selection()'),
                                                 category=category)
 
-    maya_runtime_command.create_runtime_command(command_name='fgToggleXrayDisplayOfSelection',
+    maya_runtime_command.create_runtime_command(command_name='fgToggleXRayDisplayOfSelection',
                                                 annotation='Toggle X-Ray display in the viewport on all selected '
                                                            'objects.',
                                                 command=('import fg_tools\n'
@@ -297,7 +288,7 @@ def select_lamina_faces():
 def select_non_manifold_vertices():
     nmv = component.get_non_manifold_vertices()
     if nmv:
-        objects = list(set([vert.split('.')[0] for vert in nmv]))
+        objects = list(set([vertex.split('.')[0] for vertex in nmv]))
         cmds.select(nmv)
         cmds.hilite(objects)
         cmds.selectMode(component=True)
@@ -436,4 +427,4 @@ def toggle_x_ray_display_of_selection():
 
 
 if not __fg_toolsInitialized:
-    initialize()
+    __initialize()
