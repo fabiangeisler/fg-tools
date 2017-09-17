@@ -5,6 +5,9 @@ import pymel.core as pm
 
 
 class FgMenu(object):
+    """
+    This class capsules the "FG-Tool" Menu and it's settings.
+    """
 
     def __init__(self):
 

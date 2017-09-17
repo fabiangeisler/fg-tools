@@ -54,20 +54,26 @@ def get_sourceimages_folder():
 
 
 def get_desktop_folder():
+    """
+    :returns: The absolute path to the desktop.
+    :rtype: str
+    """
     return os.path.expanduser('~').replace('Documents', 'Desktop') + '/'
 
 
 def incremental_save():
-
+    """
+    This function finds the last number in the currently open filename, increments it by 1 and saves the file under this
+    new name.
+    """
     curr_filename = cmds.file(q=True, sn=True)
     match = re.finditer(r'\d+', curr_filename)
 
     if match:
-        pos_of_numbers = [m for m in match]
-        last_number = pos_of_numbers[-1]
+        last_number = [m for m in match][-1]
 
-        inc_number_int = int(last_number.group(0)) + 1
-        new_number_str = str(inc_number_int).zfill(len(last_number.group(0)))
+        new_number_int = int(last_number.group(0)) + 1
+        new_number_str = str(new_number_int).zfill(len(last_number.group(0)))
 
         increment_filename = curr_filename[:last_number.start(0)] + new_number_str + curr_filename[last_number.end(0):]
 
@@ -78,6 +84,6 @@ def incremental_save():
         else:
             file_type = 'mayaAscii'
         cmds.file(save=True, type=file_type)
-        print 'File saved: ' + increment_filename,
+        print 'File saved: ' + increment_filename + '\n',
     else:
         cmds.warning('Filename has no Numbers in it!')

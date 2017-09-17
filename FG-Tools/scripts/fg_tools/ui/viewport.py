@@ -145,16 +145,6 @@ def create_viewport_snapshot(image_file):
                    percent=100)
 
 
-def save_render_view_image(image_file):
-    editor = 'renderView'
-
-    # if no image is in the render view this returns -1
-    if cmds.renderWindowEditor(editor, query=True, nbImages=True) > -1:
-        print 'yeah'
-
-    cmds.renderWindowEditor(editor, e=True, writeImage=image_file)
-
-
 def toggle_smooth_shaded(model_editor):
     if wireframe_is_active(model_editor):
         set_wireframe_on_shaded(model_editor, value=True)
