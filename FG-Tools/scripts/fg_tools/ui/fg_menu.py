@@ -51,18 +51,18 @@ class FgMenu(object):
             pm.menuItem(dividerLabel='Select', divider=True)
             pm.menuItem(label='Select Triangles',
                         command='fgSelectTriangles;',
-                        image='fg_triangles.png',
+                        image='fg-icons_triangles_32.png',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Select Triangles from all polygon objects you selected.')
             pm.menuItem(label='Select N-Gons',
-                        image='fg_ngons.png',
+                        image='fg-icons_n-gons_32.png',
                         command='fgSelectNGons;',
                         sourceType='mel',
                         echoCommand=True,
                         annotation='Select N-Gons from all polygon objects you selected.')
             pm.menuItem(label='Select Lamina Faces',
-                        imageOverlayLabel='Lamina',
+                        image='fg-icons_lamina_32.png',
                         command='fgSelectLaminaFaces;',
                         sourceType='mel',
                         echoCommand=True,
