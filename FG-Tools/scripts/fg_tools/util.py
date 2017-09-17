@@ -1,64 +1,39 @@
-'''
+"""
 little utility functions for this and that.
-'''
+"""
 import maya.cmds as cmds
 
 
-def removePlugin(pluginName):
-    '''
-    This tries to unload the given plugin from maya by deleting all its registered nodes first
-    and the unload the plugin. There is still no garantie that this will work.
-
-    :param str pluginName: The name of the plugin
-    '''
-    if cmds.pluginInfo(pluginName, q=True, loaded=True):
-        cmds.pluginInfo(pluginName, e=True, autoload=False)
-
-        nodeTypes = cmds.pluginInfo(pluginName, query=True, dependNode=True)
-
-        for nodetype in nodeTypes:
-            nodes = cmds.ls(type=nodetype)
-            for node in nodes:
-                cmds.lockNode(node, lock=False)
-                print node
-                cmds.delete(node)
-        cmds.flushUndo()
-        try:
-            cmds.unloadPlugin(pluginName)
-        except Exception as err:
-            print err
-
-
-def getUpstreamNodes(node):
-    '''
+def get_upstream_nodes(node):
+    """
     :param str node:
     :returns: all upstream nodes of the given node
     :rtype: list
-    '''
-    def getInputs(node):
-        inputs = cmds.listConnections(node, source=True, destination=False)
+    """
+    def get_inputs(obj):
+        inputs = cmds.listConnections(obj, source=True, destination=False)
         if inputs is not None:
             return set(inputs)
         return set()
 
-    def getRecursiveInputs(node, parentResults=None):
-        if parentResults is None:
-            parentResults = set()
-        results = getInputs(node)
+    def get_recursive_inputs(obj, parent_results=None):
+        if parent_results is None:
+            parent_results = set()
+        results = get_inputs(obj)
         if results:
-            results.add(node)
-            relevantResults = results - parentResults
-            for inputNode in relevantResults:
-                results = results.union(getRecursiveInputs(inputNode, results))
+            results.add(obj)
+            relevant_results = results - parent_results
+            for inputNode in relevant_results:
+                results = results.union(get_recursive_inputs(inputNode, results))
         return results
 
-    resultNodes = getRecursiveInputs(node)
-    resultNodes.discard(node)
-    return list(resultNodes)
+    result_nodes = get_recursive_inputs(node)
+    result_nodes.discard(node)
+    return list(result_nodes)
 
 
-def attrChangedBetween(attr, start, end):
-    '''
+def attr_changed_between(attr, start, end):
+    """
     Takes the given attribute and checks if it changes between
     the given time range. This is helpful to check whether an object is animated regardless if its parented, constrained
     or has animationcurves.
@@ -68,7 +43,7 @@ def attrChangedBetween(attr, start, end):
     :param int end: The end frame for the check.
     :returns: Whether the attribute changed.
     :rType: boolean
-    '''
+    """
     tmp = cmds.getAttr(attr, time=start)
     for frame in range(start + 1, end + 1):
         tmp2 = cmds.getAttr(attr, time=frame)
@@ -78,20 +53,21 @@ def attrChangedBetween(attr, start, end):
 
 
 class UserSelection(object):
-    '''
+    """
     A context-manager to preserve the current selection of the user.
 
     ..Example::
 
         with UserSelection() as us:
-            # in this codeblock you can select whatever you want.
+            # in this code block you can select whatever you want.
             cmds.select(cmds.ls())
             # if you still have the need to know what the user selected you can query that.
             print us
         # here the last user selection is restored
-    '''
+    """
 
-    def _getSelectMode(self):
+    @staticmethod
+    def _get_select_mode():
         if cmds.selectMode(q=True, object=True):
             return "object"
         elif cmds.selectMode(q=True, component=True):
@@ -107,7 +83,8 @@ class UserSelection(object):
         elif cmds.selectMode(q=True, preset=True):
             return "preset"
 
-    def _setSelectMode(self, mode):
+    @staticmethod
+    def _set_select_mode(mode):
         if mode == "object":
             cmds.selectMode(object=True)
         elif mode == "component":
@@ -128,16 +105,16 @@ class UserSelection(object):
         self._selectMode = ""
 
     def __enter__(self):
-        self._selectMode = self._getSelectMode()
+        self._selectMode = self._get_select_mode()
         self._userSelection = cmds.ls(selection=True, long=True)
         return self._userSelection
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self._setSelectMode(self._selectMode)
+        self._set_select_mode(self._selectMode)
         cmds.select(clear=True)
         # since the user could have changed some names in the code block of the with statement we will check
         # whether every stored item exist before selecting it again.
-        exSel = [obj for obj in self._userSelection if cmds.objExists(obj)]
-        if exSel:
-            cmds.select(exSel)
+        ex_sel = [obj for obj in self._userSelection if cmds.objExists(obj)]
+        if ex_sel:
+            cmds.select(ex_sel)
         return False
