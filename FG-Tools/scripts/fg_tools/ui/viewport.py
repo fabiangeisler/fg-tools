@@ -1,41 +1,40 @@
-'''
+"""
 This module contains functions for making playblasts and screenshots from
 modelpanels in Maya. Because of this GUI dependency this should not be loaded in batch mode.
-'''
-from pymel import core
-import maya.cmds as cmds
+"""
 import os
 import datetime
 
-import maya.cmds
+from pymel import core
+import maya.cmds as cmds
 
 
 class CaptureThumbnail(object):
-    '''
+    """
     This class can capture thumbnails from the Viewport and save them as MetaData for the current Maya scene.
     After that you can view the screenshot in the Content Browser.
 
     Usage::
 
         CaptureThumbnail()
-    '''
+    """
 
     def __init__(self):
-        cmds.thumbnailCaptureComponent(capture=True,  # @UndefinedVariable
-                                       fileDialogCallback=('python("import fcore.ui.playblast as pb;'
-                                                           'pb.CaptureThumbnail.saveCapture()")'))
+        cmds.thumbnailCaptureComponent(capture=True,
+                                       fileDialogCallback=('python("import fg_tools.ui.viewport as viewport;'
+                                                           'viewport.CaptureThumbnail.save_capture()")'))
 
     @staticmethod
-    def saveCapture():
-        cmds.thumbnailCaptureComponent(save=maya.cmds.file(query=True, sceneName=True))  # @UndefinedVariable
+    def save_capture():
+        cmds.thumbnailCaptureComponent(save=cmds.file(query=True, sceneName=True))
 
 
-def getModelPanel():
-    '''
+def get_model_panel():
+    """
     This function will get (or otherwise guess) the currently active model-panel!
     :return: the panel or an empty string if no panel is visible
     :rtype: str
-    '''
+    """
     mod_pan = cmds.getPanel(type='modelPanel') or []
     foc_pan = cmds.getPanel(withFocus=True) or []
     vis_pan = cmds.getPanel(visiblePanels=True) or []
@@ -61,35 +60,35 @@ def getModelPanel():
             return vis_mod_pan[0]
 
 
-def makePlayblast(mode='desktop'):
-    '''
+def create_playblast(mode='desktop'):
+    """
     make a playblast from the current model panel
 
     :param mode: 'dialog': Save with Dialog
                  'project': Save to Project Directory
                  'desktop': Save to Desktop
-    '''
+    """
 
-    p = getModelPanel()
+    p = get_model_panel()
     cam = cmds.modelEditor(p, query=True, camera=True)
-    currFileName = cmds.file(query=True, sn=True, shn=True)
-    niceFileName = ('{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'
-                    '').format(datetime.datetime.now(),
-                               currFileName.strip('.ma'),
-                               cam)
+    curr_file_name = cmds.file(query=True, sn=True, shn=True)
+    nice_file_name = ('{0:%Y%m%d_%H%M%S}_{1:s}_{2:s}'
+                      '').format(datetime.datetime.now(),
+                                 curr_file_name.strip('.ma'),
+                                 cam)
 
-    saveDir = os.path.expanduser('~').replace('Documents', 'Desktop/') + niceFileName + '.mov'
+    save_dir = os.path.expanduser('~').replace('Documents', 'Desktop/') + nice_file_name + '.mov'
     if mode == 'project':
-        projectDir = cmds.workspace(query=True, rd=True)
-        saveDir = projectDir + '/images/' + niceFileName + '.mov'
+        project_dir = cmds.workspace(query=True, rd=True)
+        save_dir = project_dir + '/images/' + nice_file_name + '.mov'
     elif mode == 'dialog':
-        saveDir = cmds.fileDialog2(cap='Save Playblast',
-                                   fileFilter=('MOV (*.mov);;'
-                                               'JPEG-Sequence (*.jpg)'),
-                                   startingDirectory=saveDir,
-                                   fileMode=0,
-                                   okCaption='Save',
-                                   dialogStyle=2)[0]
+        save_dir = cmds.fileDialog2(cap='Save Playblast',
+                                    fileFilter=('MOV (*.mov);;'
+                                                'JPEG-Sequence (*.jpg)'),
+                                    startingDirectory=save_dir,
+                                    fileMode=0,
+                                    okCaption='Save',
+                                    dialogStyle=2)[0]
 
     win = core.window(title='Playblast Panel', widthHeight=(1282, 722))
     core.paneLayout()
@@ -106,8 +105,8 @@ def makePlayblast(mode='desktop'):
     core.showWindow(win)
     core.modelEditor(me, edit=True, activeView=True)
 
-    if saveDir is not None:
-        if saveDir.endswith('mov'):
+    if save_dir is not None:
+        if save_dir.endswith('mov'):
             core.playblast(percent=100,
                            quality=90,
                            startTime=core.playbackOptions(query=True, minTime=True),
@@ -115,7 +114,7 @@ def makePlayblast(mode='desktop'):
                            format='qt',
                            compression='H.264',
                            forceOverwrite=True,
-                           filename=saveDir)
+                           filename=save_dir)
         else:
             core.playblast(percent=100,
                            quality=90,
@@ -124,68 +123,72 @@ def makePlayblast(mode='desktop'):
                            format='image',
                            compression='jpg',
                            forceOverwrite=True,
-                           filename=saveDir)
+                           filename=save_dir)
 
     core.deleteUI(win, window=True)
 
 
-def createViewportSnapshot(imageFile):
-    '''
-    creates a snapshot from the current Viewport and saves it to the specified path
-    :param str imageFile: the full path for the image file.
-    '''
+def create_viewport_snapshot(image_file):
+    """
+    Creates a snapshot from the current Viewport and saves it to the specified path.
+
+    :param str image_file: the full path for the image file.
+    """
+    image_dir = os.path.dirname(image_file)
+    if not os.path.exists(image_dir):
+        os.makedirs(image_dir)
+
     cmds.playblast(frame=core.currentTime(query=True),
                    format='image',
-                   compression=imageFile.split('.')[-1].lower(),
-                   completeFilename=imageFile,
+                   compression=image_file.split('.')[-1].lower(),
+                   completeFilename=image_file,
                    percent=100)
 
 
-def saveRenderViewImage(imageFile):
-
+def save_render_view_image(image_file):
     editor = 'renderView'
 
     # if no image is in the render view this returns -1
     if cmds.renderWindowEditor(editor, query=True, nbImages=True) > -1:
         print 'yeah'
 
-    cmds.renderWindowEditor(editor, e=True, writeImage=imageFile)
+    cmds.renderWindowEditor(editor, e=True, writeImage=image_file)
 
 
-def toggleSmoothShaded(mdlEditor):
-    if wireframeIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=True)
-        setSmoothShaded(mdlEditor)
-    elif wireframeOnShadedIsActive(mdlEditor):
-        setWireframe(mdlEditor)
+def toggle_smooth_shaded(model_editor):
+    if wireframe_is_active(model_editor):
+        set_wireframe_on_shaded(model_editor, value=True)
+        set_smooth_shaded(model_editor)
+    elif wireframe_on_shaded_is_active(model_editor):
+        set_wireframe(model_editor)
 
 
-def toggleWireframe(mdlEditor):
-    if smoothShadedIsActive(mdlEditor) and wireframeOnShadedIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=False)
-    elif smoothShadedIsActive(mdlEditor) and not wireframeOnShadedIsActive(mdlEditor):
-        setWireframeOnShaded(mdlEditor, value=True)
+def toggle_wireframe(model_editor):
+    if smooth_shaded_is_active(model_editor) and wireframe_on_shaded_is_active(model_editor):
+        set_wireframe_on_shaded(model_editor, value=False)
+    elif smooth_shaded_is_active(model_editor) and not wireframe_on_shaded_is_active(model_editor):
+        set_wireframe_on_shaded(model_editor, value=True)
 
 
-def setWireframe(mdlEditor):
-    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='wireframe')
+def set_wireframe(model_editor):
+    cmds.modelEditor(model_editor, edit=True, displayAppearance='wireframe')
 
 
-def setSmoothShaded(mdlEditor):
-    cmds.modelEditor(mdlEditor, edit=True, displayAppearance='smoothShaded')
+def set_smooth_shaded(model_editor):
+    cmds.modelEditor(model_editor, edit=True, displayAppearance='smoothShaded')
 
 
-def setWireframeOnShaded(mdlEditor, value=True):
-    cmds.modelEditor(mdlEditor, edit=True, wireframeOnShaded=value)
+def set_wireframe_on_shaded(model_editor, value=True):
+    cmds.modelEditor(model_editor, edit=True, wireframeOnShaded=value)
 
 
-def wireframeIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'wireframe'
+def wireframe_is_active(model_editor):
+    return cmds.modelEditor(model_editor, query=True, displayAppearance=True) == 'wireframe'
 
 
-def smoothShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, displayAppearance=True) == 'smoothShaded'
+def smooth_shaded_is_active(model_editor):
+    return cmds.modelEditor(model_editor, query=True, displayAppearance=True) == 'smoothShaded'
 
 
-def wireframeOnShadedIsActive(mdlEditor):
-    return cmds.modelEditor(mdlEditor, query=True, wireframeOnShaded=True)
+def wireframe_on_shaded_is_active(model_editor):
+    return cmds.modelEditor(model_editor, query=True, wireframeOnShaded=True)
