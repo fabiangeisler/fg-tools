@@ -11,21 +11,33 @@ def get_upstream_nodes(node):
     :rtype: list
     """
     def get_inputs(obj):
+        """
+        :param str obj: A Maya node name.
+        :returns: All incoming nodes from the given object.
+        :rtype: set[str]
+        """
         inputs = cmds.listConnections(obj, source=True, destination=False)
         if inputs is not None:
             return set(inputs)
         return set()
 
     def get_recursive_inputs(obj, parent_results=None):
+        """
+        :param str obj: A Maya node name.
+        :param set parent_results: A set of nodes that already have bin detected as results.
+                                   So no double checking will occur.
+        :returns: All incoming nodes from the given object, including all of their child nodes.
+        :rtype: set
+        """
         if parent_results is None:
             parent_results = set()
-        results = get_inputs(obj)
-        if results:
-            results.add(obj)
-            relevant_results = results - parent_results
+        input_nodes = get_inputs(obj)
+        if input_nodes:
+            input_nodes.add(obj)
+            relevant_results = input_nodes - parent_results
             for inputNode in relevant_results:
-                results = results.union(get_recursive_inputs(inputNode, results))
-        return results
+                input_nodes = input_nodes.union(get_recursive_inputs(inputNode, input_nodes))
+        return input_nodes
 
     result_nodes = get_recursive_inputs(node)
     result_nodes.discard(node)

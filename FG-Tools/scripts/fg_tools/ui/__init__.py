@@ -1,4 +1,5 @@
 """
+This class builds the interface for the ui classes and functions.
 """
 import datetime
 

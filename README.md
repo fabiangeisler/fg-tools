@@ -5,22 +5,18 @@ After installation you will get a small extra menu ("FG-Tools") where you can fi
 You can assign hot-keys to them if you want to.
 
 ## Installation
-* Clone this repository to your local hard-drive.
-* Open Maya and execute this script in the script-editor:
-
-  ```python
-  import fg_tools
-  fg_tools.create_menu()
-  ```
+* Clone this repository to *"C:\Users\USERNAME\Documents\maya\MAYA_VERSION\modules"*. 
+  (If the folder does not exist, just create it.)
+* Open Maya and you should find "FG-Tools" in the menu bar.
 * That's it! :)
 
-I recommend to put this in a shelf button or in the userSetup.py.
-Also note that this is save to execute in batch-mode. The UI creation simply be skipped in that case.
+These scripts are save to execute in batch-mode.
+The UI creation simply be skipped in that case.
 
 Supported Platforms: **Windows**
 
-Supported Maya Versions: **2015, 2016, 2017**
+Supported Maya Versions: **2016, 2017, 2018**
 
-Author: [**Fabian Czichelski**](http://hub.morroimages.com/display/~f.czichelski)
+Author: **Fabian Geisler**
 
 Use at you own risk! Awesomeness not guaranteed (but likely ;) )!
