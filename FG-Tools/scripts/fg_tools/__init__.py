@@ -381,7 +381,7 @@ def spherify():
     new_positions = math_extended.spherify(positions, average_distance)
 
     for vertex, position in zip(vertices, new_positions):
-        cmds.move(position[0], position[1], position[2], vertex, absolut=True)
+        cmds.move(position[0], position[1], position[2], vertex, absolute=True)
 
 
 def copy_pivot():
