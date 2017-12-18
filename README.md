@@ -13,10 +13,10 @@ You can assign hot-keys to them if you want to.
 These scripts are save to execute in batch-mode.
 The UI creation simply be skipped in that case.
 
-Supported Platforms: **Windows**
+Supported Platforms: **Windows** (Linux and OSX probably as well, but untested)
 
 Supported Maya Versions: **2016, 2017, 2018**
 
 Author: **Fabian Geisler**
 
-Use at you own risk! Awesomeness not guaranteed (but likely ;) )!
+Use at you own risk!

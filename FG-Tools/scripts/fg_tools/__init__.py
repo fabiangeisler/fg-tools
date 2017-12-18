@@ -265,7 +265,7 @@ def select_triangles():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print 'Selected {0:d} Triangles.\n'.format(len(tris)),
+        print 'Selected {0:d} Triangles.\n'.format(cmds.polyEvaluate(objects, faceComponent=True)),
     else:
         cmds.selectMode(object=True)
         print 'Selection does not contain Triangles!\n',
@@ -282,7 +282,7 @@ def select_n_gons():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print 'Selected {0:d} N-Gons.\n'.format(len(ngons)),
+        print 'Selected {0:d} N-Gons.\n'.format(cmds.polyEvaluate(objects, faceComponent=True)),
     else:
         cmds.selectMode(object=True)
         print 'Selection does not contain N-Gons!\n',
@@ -299,7 +299,7 @@ def select_lamina_faces():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshFace=True)
-        print 'Selected {0:d} lamina faces.\n'.format(len(lamina)),
+        print 'Selected {0:d} lamina faces.\n'.format(cmds.polyEvaluate(objects, faceComponent=True)),
     else:
         cmds.selectMode(object=True)
         print 'Selection does not contain lamina faces!\n',
@@ -316,10 +316,10 @@ def select_non_manifold_vertices():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, vertex=True)
-        print 'Selected {0:d} non-manifold vertices'.format(len(nmv)),
+        print 'Selected {0:d} non-manifold vertices\n'.format(cmds.polyEvaluate(objects, vertexComponent=True)),
     else:
         cmds.selectMode(object=True)
-        print 'Selection does not contain non-manifold-vertices.',
+        print 'Selection does not contain non-manifold-vertices.\n',
 
 
 def select_uv_seams():
@@ -338,7 +338,7 @@ def select_uv_seams():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshEdge=True)
-        print 'Selected {0:d} seam edges.\n'.format(len(seam_edges)),
+        print 'Selected {0:d} seam edges.\n'.format(cmds.polyEvaluate(objects, edgeComponent=True)),
     else:
         cmds.selectMode(object=True)
         print 'Selection does not seam edges.\n',
@@ -360,7 +360,7 @@ def select_hard_edges():
         cmds.hilite(objects)
         cmds.selectMode(component=True)
         cmds.selectType(allComponents=False, polymeshEdge=True)
-        print 'Selected {0:d} hard edges.\n'.format(len(hard_edges)),
+        print 'Selected {0:d} hard edges.\n'.format(cmds.polyEvaluate(objects, edgeComponent=True)),
     else:
         cmds.selectMode(object=True)
         print 'Selection does not hard edges.\n',
@@ -391,7 +391,7 @@ def copy_pivot():
     sel = cmds.ls(selection=True, objectsOnly=True)
     pivot.copy_pivot(sel[0])
 
-    print 'Saved Pivot from: ' + sel[0],
+    print 'Saved Pivot from:    ' + sel[0],
 
 
 def paste_pivot():
