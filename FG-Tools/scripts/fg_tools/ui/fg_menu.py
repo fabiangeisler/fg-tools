@@ -31,7 +31,8 @@ class FgMenu(object):
             pm.menuItem(label='Save Incremental',
                         sourceType='mel',
                         command='fgSaveIncremental;',
-                        annotation='Incremental Save')
+                        annotation='Save a new version of the currently open scene. '
+                                   'The last number in the file will be incremented.')
             pm.menuItem(label='Save Snapshot',
                         sourceType='mel',
                         command='fgSaveSnapshot;',
@@ -41,15 +42,15 @@ class FgMenu(object):
                 pm.menuItem(label='Open Scene Folder',
                             sourceType='mel',
                             command='fgOpenSceneFolder;',
-                            annotation='Open Scene Folder')
+                            annotation='Open the folder where the current scene lives in.')
                 pm.menuItem(label='Open Render Folder',
                             sourceType='mel',
                             command='fgOpenRenderFolder;',
-                            annotation='Open Render Folder')
+                            annotation='Open the folder that is defined as "images" in the workspace.')
                 pm.menuItem(label='Open Texture Folder',
                             sourceType='mel',
                             command='fgOpenTextureFolder;',
-                            annotation='Open Texture Folder')
+                            annotation='Open the folder that is defined as "Source images" in the workspace.')
 
             pm.menuItem(dividerLabel='Select', divider=True)
             pm.menuItem(label='Select Triangles',
@@ -57,13 +58,13 @@ class FgMenu(object):
                         image='fg-icons_triangles_32.png',
                         sourceType='mel',
                         echoCommand=True,
-                        annotation='Select Triangles from all polygon objects you selected.')
+                        annotation='Select triangles from all polygon objects you selected.')
             pm.menuItem(label='Select N-Gons',
                         image='fg-icons_n-gons_32.png',
                         command='fgSelectNGons;',
                         sourceType='mel',
                         echoCommand=True,
-                        annotation='Select N-Gons from all polygon objects you selected.')
+                        annotation='Select n-gons from all polygon objects you selected.')
             pm.menuItem(label='Select Lamina Faces',
                         image='fg-icons_lamina_32.png',
                         command='fgSelectLaminaFaces;',
@@ -75,13 +76,13 @@ class FgMenu(object):
                         command='fgSelectNonManifoldVertices;',
                         sourceType='mel',
                         echoCommand=True,
-                        annotation='Select Non-Manifold Vertices from all polygon objects you selected.')
+                        annotation='Select non-manifold vertices from all polygon objects you selected.')
             pm.menuItem(label='Select UV-Seams',
                         imageOverlayLabel='UVSeam',
                         command='fgSelectUVSeams;',
                         sourceType='mel',
                         echoCommand=True,
-                        annotation='Select UV-Seams in polygon objects you selected.')
+                        annotation='Select UV-seams from all polygon objects you selected.')
             pm.menuItem(label='Select Hard Edges',
                         imageOverlayLabel='HardE',
                         command='fgSelectHardEdges;',
