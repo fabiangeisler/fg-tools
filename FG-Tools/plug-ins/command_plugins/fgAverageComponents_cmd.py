@@ -51,15 +51,33 @@ class FgAverageComponents_cmd(om.MPxCommand):
         mdl.move_components_to_axis(selection.getSelectionStrings(), axis=axis)
 
 
+def attach_command(mfn_plugin):
+    """
+    attaches the command to the given MFnPlugin.
+
+    :param OpenMaya.MFnPlugin mfn_plugin:
+    """
+    mfn_plugin.registerCommand(FgAverageComponents_cmd.cmdName,
+                               FgAverageComponents_cmd.creator,
+                               FgAverageComponents_cmd.createSyntax)
+
+
+def remove_command(mfn_plugin):
+    """
+    Removes the command from the given MFnPlugin.
+
+    :param OpenMaya.MFnPlugin mfn_plugin:
+    """
+    mfn_plugin.deregisterCommand(FgAverageComponents_cmd.cmdName)
+
+
 # noinspection PyPep8Naming
 def initializePlugin(plugin):
     pluginFn = om.MFnPlugin(plugin)
-    pluginFn.registerCommand(FgAverageComponents_cmd.cmdName,
-                             FgAverageComponents_cmd.creator,
-                             FgAverageComponents_cmd.createSyntax)
+    attach_command(pluginFn)
 
 
 # noinspection PyPep8Naming
 def uninitializePlugin(plugin):
     pluginFn = om.MFnPlugin(plugin)
-    pluginFn.deregisterCommand(FgAverageComponents_cmd.cmdName)
+    remove_command(pluginFn)
