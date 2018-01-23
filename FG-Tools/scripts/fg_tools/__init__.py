@@ -1,6 +1,7 @@
 """
 This module is the entry point for the fg_tools library.
 """
+import os
 
 import maya.cmds as cmds
 
@@ -241,6 +242,8 @@ def open_render_folder():
     Open the folder where images will be rendered to.
     """
     render_folder = file_system.get_render_folder()
+    if not os.path.exists(render_folder):
+        os.makedirs(render_folder)
     file_system.open_explorer(render_folder)
     print 'Opened Folder: ' + render_folder
 
@@ -250,6 +253,8 @@ def open_texture_folder():
     Open the texture folder.
     """
     tex_folder = file_system.get_sourceimages_folder()
+    if not os.path.exists(tex_folder):
+        os.makedirs(tex_folder)
     file_system.open_explorer(tex_folder)
     print 'Opened Folder: ' + tex_folder
 
