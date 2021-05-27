@@ -15,7 +15,7 @@ The UI creation simply be skipped in that case.
 
 Supported Platforms: **Windows** (Linux and OSX probably as well, but untested)
 
-Supported Maya Versions: **2016, 2017, 2018**
+Supported Maya Versions: **2016, 2017, 2018, 2019, 2020**
 
 Author: **Fabian Geisler**
 
